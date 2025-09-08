@@ -1,0 +1,128 @@
+✅ Inference complete!
+   Total tubelets: 14946
+   Drone predictions: 1454
+
+============================================================
+
+============================================================
+TUBELET-TO-FRAME MAPPING ANALYSIS
+============================================================
+Total Tubelets           : 14946
+Drone Tubelets           : 1454 (9.7%)
+No-Drone Tubelets        : 13492
+
+Drone Confidence Statistics:
+Min Confidence           : 0.502
+Max Confidence           : 1.000
+Mean Confidence          : 0.936
+Median Confidence        : 0.999
+
+Frame Coverage Analysis:
+GT Drone Frames          : 2079
+Covered GT Frames        : 1842
+Uncovered GT Frames      : 237
+Coverage Percentage      : 88.6%
+Total Covered Frames     : 1969
+
+⚠️ Uncovered GT frames (potential missed detections):
+   00_02_45_to_00_03_10_cut: frame 46
+   00_02_45_to_00_03_10_cut: frame 110
+   00_06_10_to_00_06_27: frame 280
+   00_06_10_to_00_06_27: frame 289
+   00_06_10_to_00_06_27: frame 353
+   00_06_10_to_00_06_27: frame 298
+   00_06_10_to_00_06_27: frame 362
+   2019_09_02_C0002_2527_inspire: frame 6
+   00_06_10_to_00_06_27: frame 371
+   00_02_45_to_00_03_10_cut: frame 76
+   ... and 227 more
+============================================================
+🔍 Evaluating multiple confidence thresholds...
+   Testing threshold: 0.3
+🔍 Evaluating at confidence threshold: 0.3
+🔍 Evaluating frame-level performance (threshold=0.3)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1609
+   Testing threshold: 0.4
+🔍 Evaluating at confidence threshold: 0.4
+🔍 Evaluating frame-level performance (threshold=0.4)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1609
+   Testing threshold: 0.5
+🔍 Evaluating at confidence threshold: 0.5
+🔍 Evaluating frame-level performance (threshold=0.5)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1609
+   Testing threshold: 0.6
+🔍 Evaluating at confidence threshold: 0.6
+🔍 Evaluating frame-level performance (threshold=0.6)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1566
+   Testing threshold: 0.7
+🔍 Evaluating at confidence threshold: 0.7
+🔍 Evaluating frame-level performance (threshold=0.7)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1525
+   Testing threshold: 0.8
+🔍 Evaluating at confidence threshold: 0.8
+🔍 Evaluating frame-level performance (threshold=0.8)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1478
+   Testing threshold: 0.9
+🔍 Evaluating at confidence threshold: 0.9
+🔍 Evaluating frame-level performance (threshold=0.9)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1397
+
+🎯 Best performance: Threshold 0.3 (F1: 0.8384)
+
+================================================================================
+R3D-18 FRAME-LEVEL EVALUATION RESULTS
+================================================================================
+Threshold  Accuracy   Precision  Recall     F1-Score   TP     FP     TN     FN
+--------------------------------------------------------------------------------
+0.3        0.7298     0.9608     0.7436     0.8384     1546   63     64     533
+0.4        0.7298     0.9608     0.7436     0.8384     1546   63     64     533
+0.5        0.7298     0.9608     0.7436     0.8384     1546   63     64     533
+0.6        0.7149     0.9630     0.7253     0.8274     1508   58     69     571
+0.7        0.6963     0.9620     0.7056     0.8141     1467   58     69     612
+0.8        0.6840     0.9675     0.6878     0.8040     1430   48     79     649
+0.9        0.6555     0.9721     0.6532     0.7814     1358   39     88     721
+
+🎯 BEST PERFORMANCE:
+   Threshold: 0.3
+   F1-Score: 0.8384
+   Precision: 0.9608
+   Recall: 0.7436
+   Accuracy: 0.7298
+================================================================================
+🔍 Evaluating at confidence threshold: 0.3
+🔍 Evaluating frame-level performance (threshold=0.3)
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+📊 Evaluated 2206 frames
+   - Frames with GT drones: 2079
+   - Frames with predicted drones: 1609
+💾 Frame results saved: frame_results_threshold_0.3.csv
+📊 Processing 1454 drone predictions out of 14946 total tubelets
+💾 Frame mapping details saved to: evaluation_results\frame_mapping_details.csv
+
+💾 All results saved to: evaluation_results
+📊 Plots saved to: evaluation_results\r3d-18_threshold_analysis.png
+📊 Confusion matrix saved to: evaluation_results\r3d-18_confusion_matrix.png
+📁 Complete evaluation report saved to: evaluation_results
+
+Process finished with exit code 0

@@ -19,3 +19,4 @@ imageio>=2.9.0
 # Development (optional)
 pytest>=6.0.0
 jupyter>=1.0.0
+seaborn~=0.13.2
