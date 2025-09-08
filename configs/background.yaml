@@ -1,0 +1,17 @@
+# configs/background.yaml
+MOG2:
+  history: 100
+  var_threshold: 12
+  detect_shadows: true
+  learning_rate: 0.05
+
+ViBe:
+  num_samples: 15
+  min_matches: 2
+  radius: 20
+  subsample_factor: 1
+
+KNN:
+  history: 300
+  dist2_threshold: 450.0
+  detect_shadows: false

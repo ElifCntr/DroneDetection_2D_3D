@@ -1,0 +1,35 @@
+# configs/classifier.yaml
+R3D18:
+  pretrained: true
+  num_classes: 2
+  input_size: 112
+  T: 3
+  epochs: 20          # Reduced epochs since we have early stopping
+  batch_size: 32      # Smaller batch size for better generalization
+  lr: 1.0e-4          # Lower learning rate
+  weight_decay: 1.0e-3 # Stronger regularization
+  freeze_backbone: true
+  dropout_rate: 0.5    # Dropout for regularization
+  patience: 20          # Early stopping patience
+  min_delta: 0.001     # Minimum improvement threshold
+
+
+checkpointing:
+  save_best: true # Keep best-by metric
+  save_last: true # Keep last every epoch
+  save_every: 5 # Also save every N epochs (0 disables)
+  keep_every_k: 3 # Keep most recent K periodic saves (0 keeps all)
+  metric: "f1" # "f1" | "acc" | "loss"
+  mode: "max" # "max" for f1/acc, "min" for loss
+
+
+early_stopping:
+  patience: 0 # Stop if no improvement for N epochs (0 disables)
+  min_delta: 0 # Minimum improvement to reset patience
+
+
+CNN:
+  backbone: "resnet18"
+  pretrained: true
+  epochs: 25
+  batch_size: 32

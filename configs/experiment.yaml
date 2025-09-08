@@ -1,0 +1,169 @@
+# configs/experiment.yaml
+
+# =========================
+# DroneDetection experiment
+# =========================
+
+paths:
+  # Raw data
+  input_video_dir: "data/raw"
+  annotations_dir: "data/annotations"
+
+  # Split files (one filename per line, with extensions)
+  splits:
+    train_list: "data/splits/train_videos.txt"
+    val_list:   "data/splits/val_videos.txt"
+    test_list:  "data/splits/test_videos.txt"
+
+  # Generated artifacts
+  roi_output_dir: "output/rois"
+  tubelets_dir:   "data/tubelets"            # root for saved tubelets
+  tubelet_indexes:
+    train_csv: "data/tubelets/train_index.csv"
+    val_csv:   "data/tubelets/val_index.csv"
+    test_csv:  "data/tubelets/test_index.csv"   # optional; usually build at inference time
+
+  # Model checkpoints
+  checkpoints_dir: "models/r3d18_static_t3"
+
+visualize:
+  show_preprocess: false
+  wait_ms: 1000
+  scale_factor: 0.3
+
+# -------------------------
+# Background subtraction
+# -------------------------
+background:
+  method: "MOG2"    #"MOG2" or "VIBE"
+  mog2:
+    history: 200
+    var_threshold: 12        # Will be adapted automatically (gentle: 12, aggressive: 16)
+    detect_shadows: true
+    learning_rate: 0.001
+  vibe:
+    num_samples: 20
+    min_matches: 2
+    radius: 20
+    subsample_factor: 12
+
+# -------------------------
+# Preprocess (after BGS) - These will be adapted automatically
+# -------------------------
+preprocess:
+  threshold:
+    type: "fixed"            # "fixed" or "otsu"
+    fixed_value: 200
+    shadow_value: 127
+
+  blur:
+    method: "median"         # "gaussian" or "median"
+    kernel_size: 1          # Will be adapted (gentle: 1, aggressive: 3)
+
+  morphology:
+    open_kernel: 1          # Will be adapted (gentle: 1, aggressive: 3)
+    close_kernel: 5         # Static
+    min_area: 10            # Will be adapted (gentle: 10, aggressive: 50)
+    padding_percentage: 0.3  # NEW: Percentage-based padding (30%)
+
+  contour:
+    min_area: 100
+
+  merge_contours:
+    iou_thresh: 0.05
+    distance_thresh: 0    # merge boxes within x pixels of each other
+
+  roi:
+    pad: 4
+    out_size: [112, 112]
+    save_roi: false
+
+# -------------------------
+# Tubelet generation
+# -------------------------
+tubelet_gen:
+  T: 3
+  out_size: 112
+  square: true
+  scale_factor: 1.5          # enlarges square crop; try 1.3—1.6
+  pad_px: 4
+  min_side: 24               # ignore tiny boxes
+
+  # Negatives vs GT at t0
+  neg_iou_max: 0.0001           # proposals with IoU < this vs any GT are negatives
+  neg_per_gt: 2              # initial sampling per GT
+  max_neg_per_frame: 6
+  bg_only_negatives: 2        # when a frame has no GTs
+
+  # Final balancing written to CSV (downsample negatives if needed)
+  pos_neg_ratio: 1.0          # target overall ratio (pos:neg). 1.0 = balanced
+
+  # Limits to avoid one video dominating
+  cap_neg_per_frame: 3
+
+  # Dry-run visualization (no saving when enabled)
+  visualize:
+    enabled: false
+    wait_ms: 3000
+    show_triplet: false
+    colors:
+      gt:   [0, 255, 0]       # green
+      neg:  [0, 0, 255]       # red
+      crop: [255, 0, 0]       # blue
+
+# -------------------------
+# Classifier (3D CNN)
+# -------------------------
+classifier:
+  method: "r3d18"
+  R3D18:
+    pretrained: false         # set true if using Kinetics init
+    num_classes: 2
+    input_size: 112
+    T: 3
+    epochs: 30
+    batch_size: 64
+    lr: 1.0e-3
+    weight_decay: 1.0e-4
+
+# -------------------------
+# Training control
+# -------------------------
+checkpointing:
+  dir: "models/r3d18_static_t3"
+  save_best: true
+  save_last: true
+  save_every: 5               # 0 disables periodic
+  keep_every_k: 3             # keep most recent K periodic; 0 keeps all
+  metric: "f1"                # "f1" | "acc" | "loss"
+  mode: "max"                 # "max" for f1/acc, "min" for loss
+
+early_stopping:
+  patience: 0                 # 0 disables
+  min_delta: 0.0
+
+# -------------------------
+# Evaluation
+# -------------------------
+evaluation:
+  checkpoint: "best_f1.pt"    # "best_f1.pt" | "last" | filename under checkpoints_dir
+
+# -------------------------
+# Scoring (for BGS proposal eval)
+# -------------------------
+scoring:
+  alpha: 1.0
+  beta: 0.1
+  iou_thresh: 0.5
+
+# -------------------------
+# Optional grid search space (if you run it)
+# -------------------------
+param_grid:
+  background.mog2.history:       [100, 200, 500]
+  background.mog2.var_threshold: [12, 30, 50]
+  background.mog2.learning_rate: [0.001, 0.01]
+  preprocess.blur.kernel_size:   [3, 5]
+  preprocess.morphology.open_kernel:  [3, 5, 7, 11]
+  preprocess.morphology.close_kernel: [1, 3, 5, 7]
+  preprocess.morphology.min_area:     [50, 80, 100, 200]

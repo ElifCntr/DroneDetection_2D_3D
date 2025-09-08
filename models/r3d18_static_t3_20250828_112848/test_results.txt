@@ -1,0 +1,139 @@
+==================================================
+EVALUATING: r3d18_static_t3_20250828_112848
+==================================================
+[INFO] Loading model from D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\models\r3d18_static_t3_20250828_112848\best.pth
+[INFO] Loading checkpoint to device: cpu
+[INFO] Removing 'backbone.' prefix from keys
+[INFO] Model loaded on device: cpu
+[INFO] Model loaded: 33,167,298 parameters
+[INFO] Loading data from D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data\tubelets\test_index_corrected.csv
+[INFO] Dataset: 14946 tubelets
+  Positive: 1574 (10.5%)
+  Negative: 13372 (89.5%)
+[INFO] Loading tubelet files...
+  Loaded 1999 tubelets...
+  Loaded 3999 tubelets...
+  Loaded 5999 tubelets...
+  Loaded 7999 tubelets...
+  Loaded 9999 tubelets...
+  Loaded 11999 tubelets...
+  Loaded 13999 tubelets...
+[INFO] Successfully loaded 14946 tubelets
+[INFO] Running inference on 14946 tubelets
+[INFO] Using device: cpu
+[INFO] Batch size: 16
+[INFO] Input tensor device: cpu
+[INFO] Input tensor shape: torch.Size([16, 3, 3, 112, 112])
+  Batch 10/935
+  Batch 20/935
+  Batch 30/935
+  Batch 40/935
+  Batch 50/935
+  Batch 60/935
+  Batch 70/935
+  Batch 80/935
+  Batch 90/935
+  Batch 100/935
+  Batch 110/935
+  Batch 120/935
+  Batch 130/935
+  Batch 140/935
+  Batch 150/935
+  Batch 160/935
+  Batch 170/935
+  Batch 180/935
+  Batch 190/935
+  Batch 200/935
+  Batch 210/935
+  Batch 220/935
+  Batch 230/935
+  Batch 240/935
+  Batch 250/935
+  Batch 260/935
+  Batch 270/935
+  Batch 280/935
+  Batch 290/935
+  Batch 300/935
+  Batch 310/935
+  Batch 320/935
+  Batch 330/935
+  Batch 340/935
+  Batch 350/935
+  Batch 360/935
+  Batch 370/935
+  Batch 380/935
+  Batch 390/935
+  Batch 400/935
+  Batch 410/935
+  Batch 420/935
+  Batch 430/935
+  Batch 440/935
+  Batch 450/935
+  Batch 460/935
+  Batch 470/935
+  Batch 480/935
+  Batch 490/935
+  Batch 500/935
+  Batch 510/935
+  Batch 520/935
+  Batch 530/935
+  Batch 540/935
+  Batch 550/935
+  Batch 560/935
+  Batch 570/935
+  Batch 580/935
+  Batch 590/935
+  Batch 600/935
+  Batch 610/935
+  Batch 620/935
+  Batch 630/935
+  Batch 640/935
+  Batch 650/935
+  Batch 660/935
+  Batch 670/935
+  Batch 680/935
+  Batch 690/935
+  Batch 700/935
+  Batch 710/935
+  Batch 720/935
+  Batch 730/935
+  Batch 740/935
+  Batch 750/935
+  Batch 760/935
+  Batch 770/935
+  Batch 780/935
+  Batch 790/935
+  Batch 800/935
+  Batch 810/935
+  Batch 820/935
+  Batch 830/935
+  Batch 840/935
+  Batch 850/935
+  Batch 860/935
+  Batch 870/935
+  Batch 880/935
+  Batch 890/935
+  Batch 900/935
+  Batch 910/935
+  Batch 920/935
+  Batch 930/935
+[INFO] Inference completed in 581.1s (25.7 samples/sec)
+
+[INFO] Testing thresholds:
+  Threshold 0.3: A=0.105 P=0.105 R=1.000 F1=0.191
+  Threshold 0.4: A=0.105 P=0.105 R=1.000 F1=0.191
+  Threshold 0.5: A=0.286 P=0.116 R=0.873 F1=0.205
+  Threshold 0.6: A=0.838 P=0.035 R=0.020 F1=0.026
+  Threshold 0.7: A=0.894 P=0.000 R=0.000 F1=0.000
+
+[RESULTS] Best threshold: 0.5
+Accuracy:   0.2864
+Precision:  0.1160
+Recall:     0.8729
+F1-Score:   0.2049
+
+Confusion Matrix:
+              Predicted
+              Neg    Pos
+Actual  Neg   2906   10466
+        Pos    200   1374
