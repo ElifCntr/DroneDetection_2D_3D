@@ -112,6 +112,8 @@ data/tubelets/
 *.jpg
 *.jpeg
 
+r3d_qualitative_analysis/representative_frames
+
 # Model checkpoints and outputs
 output/
 models/

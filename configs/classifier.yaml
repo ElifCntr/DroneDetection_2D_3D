@@ -31,5 +31,13 @@ early_stopping:
 CNN:
   backbone: "resnet18"
   pretrained: true
-  epochs: 25
-  batch_size: 32
+  num_classes: 2
+  input_size: 112      # Standard ResNet input size (or 112 to match R3D18)
+  epochs: 25           # Slightly more epochs for 2D training
+  batch_size: 32       # Same as R3D18 for fair comparison
+  lr: 1.0e-4           # Same learning rate as R3D18
+  weight_decay: 1.0e-3 # Same regularization
+  freeze_backbone: true # Same freezing strategy
+  dropout_rate: 0.5    # Same dropout rate
+  patience: 20         # Same early stopping patience
+  min_delta: 0.001     # Same improvement threshold

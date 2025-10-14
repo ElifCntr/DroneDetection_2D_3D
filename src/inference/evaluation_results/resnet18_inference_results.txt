@@ -1,0 +1,224 @@
+D:\miniconda3\envs\cv-gpu\python.exe D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\inference\resnet18_evaluation.py
+============================================================
+SIMPLE RESNET-18 EVALUATION
+============================================================
+Loading checkpoint...
+Creating ResNet-18 model...
+Fixing state dict keys...
+  backbone.conv1.weight -> conv1.weight
+  backbone.bn1.weight -> bn1.weight
+  backbone.bn1.bias -> bn1.bias
+  backbone.bn1.running_mean -> bn1.running_mean
+  backbone.bn1.running_var -> bn1.running_var
+  backbone.bn1.num_batches_tracked -> bn1.num_batches_tracked
+  backbone.layer1.0.conv1.weight -> layer1.0.conv1.weight
+  backbone.layer1.0.bn1.weight -> layer1.0.bn1.weight
+  backbone.layer1.0.bn1.bias -> layer1.0.bn1.bias
+  backbone.layer1.0.bn1.running_mean -> layer1.0.bn1.running_mean
+  backbone.layer1.0.bn1.running_var -> layer1.0.bn1.running_var
+  backbone.layer1.0.bn1.num_batches_tracked -> layer1.0.bn1.num_batches_tracked
+  backbone.layer1.0.conv2.weight -> layer1.0.conv2.weight
+  backbone.layer1.0.bn2.weight -> layer1.0.bn2.weight
+  backbone.layer1.0.bn2.bias -> layer1.0.bn2.bias
+  backbone.layer1.0.bn2.running_mean -> layer1.0.bn2.running_mean
+  backbone.layer1.0.bn2.running_var -> layer1.0.bn2.running_var
+  backbone.layer1.0.bn2.num_batches_tracked -> layer1.0.bn2.num_batches_tracked
+  backbone.layer1.1.conv1.weight -> layer1.1.conv1.weight
+  backbone.layer1.1.bn1.weight -> layer1.1.bn1.weight
+  backbone.layer1.1.bn1.bias -> layer1.1.bn1.bias
+  backbone.layer1.1.bn1.running_mean -> layer1.1.bn1.running_mean
+  backbone.layer1.1.bn1.running_var -> layer1.1.bn1.running_var
+  backbone.layer1.1.bn1.num_batches_tracked -> layer1.1.bn1.num_batches_tracked
+  backbone.layer1.1.conv2.weight -> layer1.1.conv2.weight
+  backbone.layer1.1.bn2.weight -> layer1.1.bn2.weight
+  backbone.layer1.1.bn2.bias -> layer1.1.bn2.bias
+  backbone.layer1.1.bn2.running_mean -> layer1.1.bn2.running_mean
+  backbone.layer1.1.bn2.running_var -> layer1.1.bn2.running_var
+  backbone.layer1.1.bn2.num_batches_tracked -> layer1.1.bn2.num_batches_tracked
+  backbone.layer2.0.conv1.weight -> layer2.0.conv1.weight
+  backbone.layer2.0.bn1.weight -> layer2.0.bn1.weight
+  backbone.layer2.0.bn1.bias -> layer2.0.bn1.bias
+  backbone.layer2.0.bn1.running_mean -> layer2.0.bn1.running_mean
+  backbone.layer2.0.bn1.running_var -> layer2.0.bn1.running_var
+  backbone.layer2.0.bn1.num_batches_tracked -> layer2.0.bn1.num_batches_tracked
+  backbone.layer2.0.conv2.weight -> layer2.0.conv2.weight
+  backbone.layer2.0.bn2.weight -> layer2.0.bn2.weight
+  backbone.layer2.0.bn2.bias -> layer2.0.bn2.bias
+  backbone.layer2.0.bn2.running_mean -> layer2.0.bn2.running_mean
+  backbone.layer2.0.bn2.running_var -> layer2.0.bn2.running_var
+  backbone.layer2.0.bn2.num_batches_tracked -> layer2.0.bn2.num_batches_tracked
+  backbone.layer2.0.downsample.0.weight -> layer2.0.downsample.0.weight
+  backbone.layer2.0.downsample.1.weight -> layer2.0.downsample.1.weight
+  backbone.layer2.0.downsample.1.bias -> layer2.0.downsample.1.bias
+  backbone.layer2.0.downsample.1.running_mean -> layer2.0.downsample.1.running_mean
+  backbone.layer2.0.downsample.1.running_var -> layer2.0.downsample.1.running_var
+  backbone.layer2.0.downsample.1.num_batches_tracked -> layer2.0.downsample.1.num_batches_tracked
+  backbone.layer2.1.conv1.weight -> layer2.1.conv1.weight
+  backbone.layer2.1.bn1.weight -> layer2.1.bn1.weight
+  backbone.layer2.1.bn1.bias -> layer2.1.bn1.bias
+  backbone.layer2.1.bn1.running_mean -> layer2.1.bn1.running_mean
+  backbone.layer2.1.bn1.running_var -> layer2.1.bn1.running_var
+  backbone.layer2.1.bn1.num_batches_tracked -> layer2.1.bn1.num_batches_tracked
+  backbone.layer2.1.conv2.weight -> layer2.1.conv2.weight
+  backbone.layer2.1.bn2.weight -> layer2.1.bn2.weight
+  backbone.layer2.1.bn2.bias -> layer2.1.bn2.bias
+  backbone.layer2.1.bn2.running_mean -> layer2.1.bn2.running_mean
+  backbone.layer2.1.bn2.running_var -> layer2.1.bn2.running_var
+  backbone.layer2.1.bn2.num_batches_tracked -> layer2.1.bn2.num_batches_tracked
+  backbone.layer3.0.conv1.weight -> layer3.0.conv1.weight
+  backbone.layer3.0.bn1.weight -> layer3.0.bn1.weight
+  backbone.layer3.0.bn1.bias -> layer3.0.bn1.bias
+  backbone.layer3.0.bn1.running_mean -> layer3.0.bn1.running_mean
+  backbone.layer3.0.bn1.running_var -> layer3.0.bn1.running_var
+  backbone.layer3.0.bn1.num_batches_tracked -> layer3.0.bn1.num_batches_tracked
+  backbone.layer3.0.conv2.weight -> layer3.0.conv2.weight
+  backbone.layer3.0.bn2.weight -> layer3.0.bn2.weight
+  backbone.layer3.0.bn2.bias -> layer3.0.bn2.bias
+  backbone.layer3.0.bn2.running_mean -> layer3.0.bn2.running_mean
+  backbone.layer3.0.bn2.running_var -> layer3.0.bn2.running_var
+  backbone.layer3.0.bn2.num_batches_tracked -> layer3.0.bn2.num_batches_tracked
+  backbone.layer3.0.downsample.0.weight -> layer3.0.downsample.0.weight
+  backbone.layer3.0.downsample.1.weight -> layer3.0.downsample.1.weight
+  backbone.layer3.0.downsample.1.bias -> layer3.0.downsample.1.bias
+  backbone.layer3.0.downsample.1.running_mean -> layer3.0.downsample.1.running_mean
+  backbone.layer3.0.downsample.1.running_var -> layer3.0.downsample.1.running_var
+  backbone.layer3.0.downsample.1.num_batches_tracked -> layer3.0.downsample.1.num_batches_tracked
+  backbone.layer3.1.conv1.weight -> layer3.1.conv1.weight
+  backbone.layer3.1.bn1.weight -> layer3.1.bn1.weight
+  backbone.layer3.1.bn1.bias -> layer3.1.bn1.bias
+  backbone.layer3.1.bn1.running_mean -> layer3.1.bn1.running_mean
+  backbone.layer3.1.bn1.running_var -> layer3.1.bn1.running_var
+  backbone.layer3.1.bn1.num_batches_tracked -> layer3.1.bn1.num_batches_tracked
+  backbone.layer3.1.conv2.weight -> layer3.1.conv2.weight
+  backbone.layer3.1.bn2.weight -> layer3.1.bn2.weight
+  backbone.layer3.1.bn2.bias -> layer3.1.bn2.bias
+  backbone.layer3.1.bn2.running_mean -> layer3.1.bn2.running_mean
+  backbone.layer3.1.bn2.running_var -> layer3.1.bn2.running_var
+  backbone.layer3.1.bn2.num_batches_tracked -> layer3.1.bn2.num_batches_tracked
+  backbone.layer4.0.conv1.weight -> layer4.0.conv1.weight
+  backbone.layer4.0.bn1.weight -> layer4.0.bn1.weight
+  backbone.layer4.0.bn1.bias -> layer4.0.bn1.bias
+  backbone.layer4.0.bn1.running_mean -> layer4.0.bn1.running_mean
+  backbone.layer4.0.bn1.running_var -> layer4.0.bn1.running_var
+  backbone.layer4.0.bn1.num_batches_tracked -> layer4.0.bn1.num_batches_tracked
+  backbone.layer4.0.conv2.weight -> layer4.0.conv2.weight
+  backbone.layer4.0.bn2.weight -> layer4.0.bn2.weight
+  backbone.layer4.0.bn2.bias -> layer4.0.bn2.bias
+  backbone.layer4.0.bn2.running_mean -> layer4.0.bn2.running_mean
+  backbone.layer4.0.bn2.running_var -> layer4.0.bn2.running_var
+  backbone.layer4.0.bn2.num_batches_tracked -> layer4.0.bn2.num_batches_tracked
+  backbone.layer4.0.downsample.0.weight -> layer4.0.downsample.0.weight
+  backbone.layer4.0.downsample.1.weight -> layer4.0.downsample.1.weight
+  backbone.layer4.0.downsample.1.bias -> layer4.0.downsample.1.bias
+  backbone.layer4.0.downsample.1.running_mean -> layer4.0.downsample.1.running_mean
+  backbone.layer4.0.downsample.1.running_var -> layer4.0.downsample.1.running_var
+  backbone.layer4.0.downsample.1.num_batches_tracked -> layer4.0.downsample.1.num_batches_tracked
+  backbone.layer4.1.conv1.weight -> layer4.1.conv1.weight
+  backbone.layer4.1.bn1.weight -> layer4.1.bn1.weight
+  backbone.layer4.1.bn1.bias -> layer4.1.bn1.bias
+  backbone.layer4.1.bn1.running_mean -> layer4.1.bn1.running_mean
+  backbone.layer4.1.bn1.running_var -> layer4.1.bn1.running_var
+  backbone.layer4.1.bn1.num_batches_tracked -> layer4.1.bn1.num_batches_tracked
+  backbone.layer4.1.conv2.weight -> layer4.1.conv2.weight
+  backbone.layer4.1.bn2.weight -> layer4.1.bn2.weight
+  backbone.layer4.1.bn2.bias -> layer4.1.bn2.bias
+  backbone.layer4.1.bn2.running_mean -> layer4.1.bn2.running_mean
+  backbone.layer4.1.bn2.running_var -> layer4.1.bn2.running_var
+  backbone.layer4.1.bn2.num_batches_tracked -> layer4.1.bn2.num_batches_tracked
+  backbone.fc.1.weight -> fc.1.weight
+  backbone.fc.1.bias -> fc.1.bias
+Loading fixed state dict...
+✓ Model loaded successfully!
+
+Loading test data from: D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data\2d_regions\test\test_2d_index.csv
+Loading CSV: D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data\2d_regions\test\test_2d_index.csv
+First line of CSV: image_path,label,original_tubelet
+Detected header row, skipping it...
+Loaded 14946 samples
+Sample row: {'image_path': 'D:\\Elif\\Sussex-PhD\\Python_Projects\\DroneDetection\\data/2d_regions\\test\\negative\\test_000000.jpg', 'label': 0, 'tubelet_path': 'D:\\Elif\\Sussex-PhD\\Python_Projects\\DroneDetection\\data/tubelets\\test\\test_000000.npy'}
+Sample image path: D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data/2d_regions\test\negative\test_000000.jpg
+Sample path exists: True
+Test set size: 14946 samples
+
+Running inference...
+Loading sample 0: D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data/2d_regions\test\negative\test_000000.jpg (label: 0)
+Loading sample 1: D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data/2d_regions\test\negative\test_000001.jpg (label: 0)
+Loading sample 2: D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data/2d_regions\test\negative\test_000002.jpg (label: 0)
+  Processed 0/468 batches
+  Processed 20/468 batches
+  Processed 40/468 batches
+  Processed 60/468 batches
+  Processed 80/468 batches
+  Processed 100/468 batches
+  Processed 120/468 batches
+  Processed 140/468 batches
+  Processed 160/468 batches
+  Processed 180/468 batches
+  Processed 200/468 batches
+  Processed 220/468 batches
+  Processed 240/468 batches
+  Processed 260/468 batches
+  Processed 280/468 batches
+  Processed 300/468 batches
+  Processed 320/468 batches
+  Processed 340/468 batches
+  Processed 360/468 batches
+  Processed 380/468 batches
+  Processed 400/468 batches
+  Processed 420/468 batches
+  Processed 440/468 batches
+  Processed 460/468 batches
+
+Computing metrics...
+
+============================================================
+TEST RESULTS
+============================================================
+
+OVERALL METRICS:
+  Test Accuracy:   0.9469
+  Test Precision:  0.9558
+  Test Recall:     0.9469
+  Test F1-Score:   0.9498
+
+COMPARISON:
+  Validation F1:   0.8639
+  Test F1:         0.9498
+  Difference:      +0.0859
+
+PER-CLASS METRICS:
+  Background:
+    Precision: 0.9867
+    Recall:    0.9536
+    F1-Score:  0.9698
+  Drone:
+    Precision: 0.6930
+    Recall:    0.8907
+    F1-Score:  0.7795
+
+CONFUSION MATRIX:
+              Predicted
+              Bg    Drone
+  Actual Bg   12751   621
+        Drone  172  1402
+
+TEST SET DISTRIBUTION:
+  Background: 13372 samples (89.5%)
+  Drone: 1574 samples (10.5%)
+
+ERROR ANALYSIS:
+  Correct predictions: 14153 / 14946 (94.7%)
+  Errors: 793 / 14946 (5.3%)
+    False Positives (Bg→Drone): 621
+    False Negatives (Drone→Bg): 172
+
+============================================================
+RECOMMENDATION
+============================================================
+🟢 EXCELLENT - Model ready for deployment!
+⚠️  Large validation/test gap - check for overfitting
+
+✅ Evaluation completed successfully!
+Final test F1-score: 0.9498
+
+Process finished with exit code 0

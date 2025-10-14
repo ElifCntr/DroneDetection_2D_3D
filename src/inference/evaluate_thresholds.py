@@ -7,7 +7,7 @@ from utils.data_processing.frame_metrics import FrameLevelMetrics
 
 # Load the CSV and skip the header row (row 0)
 df = pd.read_csv(
-    r"D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\scripts\evaluation_results\tubelet_inference_results.csv",
+    r"/inference/evaluation_results\tubelet_inference_results.csv",
     header=0)  # This will use the first row as column names
 
 print("Column names from CSV:")

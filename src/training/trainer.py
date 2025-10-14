@@ -52,18 +52,38 @@ class Trainer:
 
         # Add learning rate scheduler with more aggressive decay
         self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-            self.optimizer, mode='max', factor=0.5, patience=3, verbose=True
+            self.optimizer, mode='max', factor=0.5, patience=3
         )
 
         # Calculate class weights to handle imbalance
-        train_labels = [sample[1] for sample in train_loader.dataset.samples]
+        # Handle different dataset types
+        if hasattr(train_loader.dataset, 'samples'):
+            # Standard ImageFolder dataset
+            train_labels = [sample[1] for sample in train_loader.dataset.samples]
+        elif hasattr(train_loader.dataset, 'data') and 'label' in train_loader.dataset.data.columns:
+            # Custom RegionDataset with pandas DataFrame
+            train_labels = train_loader.dataset.data['label'].tolist()
+        else:
+            # Fallback - iterate through dataset (slower but works with any dataset)
+            print("  Warning: Using fallback method to extract labels (may be slow)")
+            train_labels = []
+            for i in range(len(train_loader.dataset)):
+                train_labels.append(train_loader.dataset[i][1])
+
+        # Count classes
         class_counts = [train_labels.count(0), train_labels.count(1)]
         total_samples = sum(class_counts)
+
+        # Calculate weights (higher weight for less frequent class)
         class_weights = [total_samples / (len(class_counts) * count) for count in class_counts]
         weight_tensor = torch.FloatTensor(class_weights)
 
+        # Move to GPU if available
         if torch.cuda.is_available():
             weight_tensor = weight_tensor.cuda()
+
+        print(f"  Class distribution: Background={class_counts[0]}, Drone={class_counts[1]}")
+        print(f"  Class weights: Background={class_weights[0]:.3f}, Drone={class_weights[1]:.3f}")
 
         self.criterion = nn.CrossEntropyLoss(weight=weight_tensor)
 

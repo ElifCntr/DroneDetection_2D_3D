@@ -5,16 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a438f1f1-f632-4374-8b4e-0d27b2c93055" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/inference/evaluate_thresholds.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inference/r3d18_evaluator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inference/r3d18_frame_evaluation_results.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scripts/run_frame_evaluation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/data_processing/frame_metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/data_processing/ground_truth_loader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/data_processing/tubelet_mapper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/visualization/evaluation_plots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/inference/image_viewer_csv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/inference/qualitative_analysis_r3d18.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/inference/qualitative_analysis_resnet18.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/visualization/visualize_all_tubelets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/visualization/visualize_tubelets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/classifier.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/classifier.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inference/evaluate_resnet18.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/evaluate_resnet18.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inference/evaluate_thresholds.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/evaluate_thresholds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inference/evaluation_results/resnet18_inference_results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/evaluation_results/resnet18_inference_results.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inference/resnet18_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/resnet18_evaluation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/extract_2d_from_tubelets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/extract_2d_from_tubelets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/train_resnet18.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/train_resnet18.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/train_resnet18_simple.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/train_resnet18_simple.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/datasets/frame_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/datasets/frame_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/datasets/region_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/datasets/region_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,57 +48,65 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Unnamed.executor": "Run",
-    "Python.base.executor": "Run",
-    "Python.check_csv.executor": "Run",
-    "Python.concat_csv_files.executor": "Run",
-    "Python.confirm_tubelets.executor": "Run",
-    "Python.debug_paths.executor": "Run",
-    "Python.detect.executor": "Run",
-    "Python.evaluate_thresholds.executor": "Run",
-    "Python.fix_tubelet_labels.executor": "Run",
-    "Python.generate_tubelets.executor": "Run",
-    "Python.grid_search.executor": "Debug",
-    "Python.headless_tubelet_generator.executor": "Run",
-    "Python.interactive_detect.executor": "Run",
-    "Python.main.executor": "Debug",
-    "Python.r3d_models.executor": "Run",
-    "Python.run_frame_evaluation.executor": "Run",
-    "Python.run_inference.executor": "Run",
-    "Python.test_tubelets.executor": "Run",
-    "Python.train.executor": "Run",
-    "Python.trainer.executor": "Run",
-    "Python.tubelet_model_evaluation.executor": "Run",
-    "Python.visualize_bgs.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Elif/Sussex-PhD/Python_Projects/DroneDetection",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Python.base.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.concat_csv_files.executor&quot;: &quot;Run&quot;,
+    &quot;Python.confirm_tubelets.executor&quot;: &quot;Run&quot;,
+    &quot;Python.debug_paths.executor&quot;: &quot;Run&quot;,
+    &quot;Python.detect.executor&quot;: &quot;Run&quot;,
+    &quot;Python.evaluate_thresholds.executor&quot;: &quot;Run&quot;,
+    &quot;Python.extract_2d_from_tubelets.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fix_tubelet_labels.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_tubelets.executor&quot;: &quot;Run&quot;,
+    &quot;Python.grid_search.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.headless_tubelet_generator.executor&quot;: &quot;Run&quot;,
+    &quot;Python.image_viewer_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.interactive_detect.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.qualitative_analysis_r3d18.executor&quot;: &quot;Run&quot;,
+    &quot;Python.qualitative_analysis_resnet18.executor&quot;: &quot;Run&quot;,
+    &quot;Python.r3d_models.executor&quot;: &quot;Run&quot;,
+    &quot;Python.resnet18_evaluation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run_frame_evaluation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run_inference.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_tubelets.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_resnet18_simple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trainer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tubelet_model_evaluation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.visualize_all_tubelets.executor&quot;: &quot;Run&quot;,
+    &quot;Python.visualize_bgs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.visualize_tubelets.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Elif/Sussex-PhD/Python_Projects/DroneDetection&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\utils\visualization" />
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\utils\debugging" />
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\utils\data_processing" />
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src" />
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\scripts" />
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data\tubelets" />
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data" />
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\inference\evaluation_results" />
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\inference" />
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\scripts\evaluation_results" />
     </key>
   </component>
   <component name="RunManager">
@@ -125,7 +142,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-PY-251.26927.90" />
+        <option value="bundled-python-sdk-41e8cd69c857-64d779b69b7a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26927.90" />
       </set>
     </attachedChunks>
   </component>
@@ -147,7 +165,10 @@
       <workItem from="1756868489953" duration="2743000" />
       <workItem from="1757171193428" duration="303000" />
       <workItem from="1757171514947" duration="234000" />
-      <workItem from="1757173180688" duration="31598000" />
+      <workItem from="1757173180688" duration="57843000" />
+      <workItem from="1759143974494" duration="10202000" />
+      <workItem from="1759234620681" duration="9914000" />
+      <workItem from="1760450921770" duration="1298000" />
     </task>
     <servers />
   </component>
@@ -155,8 +176,18 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="033ed9f6-0ca0-45f0-b6fe-a0566cf0f99e" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="033ed9f6-0ca0-45f0-b6fe-a0566cf0f99e">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -201,7 +232,10 @@
     <SUITE FILE_PATH="coverage/debug_paths_py$interactive_detect.coverage" NAME="interactive_detect Coverage Results" MODIFIED="1756596997838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$fix_tubelet_labels.coverage" NAME="fix_tubelet_labels Coverage Results" MODIFIED="1757175176885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/tubelets" />
     <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$evaluate_thresholds.coverage" NAME="evaluate_thresholds Coverage Results" MODIFIED="1757373690852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
+    <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$qualitative_analysis_r3d18.coverage" NAME="qualitative_analysis_r3d18 Coverage Results" MODIFIED="1757630486826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
+    <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$extract_2d_from_tubelets.coverage" NAME="extract_2d_from_tubelets Coverage Results" MODIFIED="1757434411190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/scripts" />
     <SUITE FILE_PATH="coverage/DroneDetection$debug_paths.coverage" NAME="debug_paths Coverage Results" MODIFIED="1756323275197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/export_results_py$interactive_detect.coverage" NAME="interactive_detect Coverage Results" MODIFIED="1759148764773" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/utils/visualization" />
     <SUITE FILE_PATH="coverage/visualize_bgs_py$interactive_detect.coverage" NAME="interactive_detect Coverage Results" MODIFIED="1756848205886" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/debug_paths_py$run_inference.coverage" NAME="run_inference Coverage Results" MODIFIED="1756591716896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$headless_tubelet_generator.coverage" NAME="headless_tubelet_generator Coverage Results" MODIFIED="1756937655200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
@@ -209,15 +243,21 @@
     <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$check_csv.coverage" NAME="check_csv Coverage Results" MODIFIED="1757177452656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/tubelets" />
     <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$run_frame_evaluation.coverage" NAME="run_frame_evaluation Coverage Results" MODIFIED="1757364832023" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/scripts" />
     <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$confirm_tubelets.coverage" NAME="confirm_tubelets Coverage Results" MODIFIED="1757175274171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
+    <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$image_viewer_csv.coverage" NAME="image_viewer_csv Coverage Results" MODIFIED="1757625910325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
+    <SUITE FILE_PATH="coverage/export_results_py$visualize_all_tubelets.coverage" NAME="visualize_all_tubelets Coverage Results" MODIFIED="1759234639965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/utils/visualization" />
+    <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$train_resnet18_simple.coverage" NAME="train_resnet18_simple Coverage Results" MODIFIED="1757436471193" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/scripts" />
     <SUITE FILE_PATH="coverage/DroneDetection$test_tubelets.coverage" NAME="test_tubelets Coverage Results" MODIFIED="1756320007011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/tubelets" />
+    <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$resnet18_evaluation.coverage" NAME="resnet18_evaluation Coverage Results" MODIFIED="1757444229841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/debug_paths_py$visualize_bgs.coverage" NAME="visualize_bgs Coverage Results" MODIFIED="1756661405827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/debug_paths_py$debug_paths.coverage" NAME="debug_paths Coverage Results" MODIFIED="1756330343049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$qualitative_analysis_resnet18.coverage" NAME="qualitative_analysis_resnet18 Coverage Results" MODIFIED="1757623493392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/DroneDetection$detect.coverage" NAME="detect Coverage Results" MODIFIED="1755175673323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/headless_tubelet_generator_py$tubelet_model_evaluation.coverage" NAME="tubelet_model_evaluation Coverage Results" MODIFIED="1757246777458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/debug_paths_py$train.coverage" NAME="train Coverage Results" MODIFIED="1756376857776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/debug_paths_py$detect.coverage" NAME="detect Coverage Results" MODIFIED="1756422332453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/visualize_bgs_py$visualize_bgs.coverage" NAME="visualize_bgs Coverage Results" MODIFIED="1756858931039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
     <SUITE FILE_PATH="coverage/visualize_bgs_py$run_inference.coverage" NAME="run_inference Coverage Results" MODIFIED="1756834773496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/inference" />
+    <SUITE FILE_PATH="coverage/export_results_py$visualize_tubelets.coverage" NAME="visualize_tubelets Coverage Results" MODIFIED="1759149566292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/utils/visualization" />
     <SUITE FILE_PATH="coverage/debug_paths_py$r3d_models.coverage" NAME="r3d_models Coverage Results" MODIFIED="1756339060990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/training/models" />
     <SUITE FILE_PATH="coverage/DroneDetection$train.coverage" NAME="train Coverage Results" MODIFIED="1756322586897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
