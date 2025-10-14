@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a438f1f1-f632-4374-8b4e-0d27b2c93055" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/inference/image_viewer_csv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inference/qualitative_analysis_r3d18.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/inference/qualitative_analysis_resnet18.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/visualization/visualize_all_tubelets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/visualization/visualize_tubelets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/classifier.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/classifier.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inference/evaluate_resnet18.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/evaluate_resnet18.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inference/evaluate_thresholds.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/evaluate_thresholds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inference/evaluation_results/resnet18_inference_results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/evaluation_results/resnet18_inference_results.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inference/resnet18_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/resnet18_evaluation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/extract_2d_from_tubelets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/extract_2d_from_tubelets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/train_resnet18.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/train_resnet18.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/train_resnet18_simple.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/train_resnet18_simple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/training/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/training/datasets/frame_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/datasets/frame_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/training/datasets/region_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/datasets/region_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/training/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/trainer.py" afterDir="false" />
-    </list>
+    <list default="true" id="a438f1f1-f632-4374-8b4e-0d27b2c93055" name="Changes" comment="Evaluation scripts and results are added for both ResNet18 and R3D18." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +20,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ElifCntr/DroneDetection_2D_3D.git",
+    "accountId": "11163cc8-3fc0-4a30-8a6d-b6c5bac24346"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -168,26 +154,40 @@
       <workItem from="1757173180688" duration="57843000" />
       <workItem from="1759143974494" duration="10202000" />
       <workItem from="1759234620681" duration="9914000" />
-      <workItem from="1760450921770" duration="1298000" />
+      <workItem from="1760450921770" duration="1623000" />
     </task>
+    <task id="LOCAL-00001" summary="Evaluation scripts and results are added for both ResNet18 and R3D18.">
+      <option name="closed" value="true" />
+      <created>1760453388117</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1760453388117</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
+    <option name="RECENT_FILTERS">
       <map>
-        <entry key="033ed9f6-0ca0-45f0-b6fe-a0566cf0f99e" value="TOOL_WINDOW" />
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="TAB_STATES">
       <map>
-        <entry key="033ed9f6-0ca0-45f0-b6fe-a0566cf0f99e">
-          <value>
-            <State />
-          </value>
-        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -195,6 +195,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Evaluation scripts and results are added for both ResNet18 and R3D18." />
+    <option name="LAST_COMMIT_MESSAGE" value="Evaluation scripts and results are added for both ResNet18 and R3D18." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
