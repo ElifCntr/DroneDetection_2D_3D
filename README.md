@@ -6,9 +6,8 @@ A comprehensive video-based drone detection system that combines computer vision
 
 - **Multiple Background Subtraction Methods**: MOG2 and ViBe algorithms for motion detection
 - **Advanced Preprocessing Pipeline**: Configurable thresholding, morphological operations, and contour detection
-- **3D CNN Classification**: R3D-18 and R(2+1)D architectures for temporal feature learning
+- **2D CNN and 3D CNN Classification**: ResNet18 and R3D-18 architectures for temporal feature learning
 - **Tubelet Generation**: Extracts spatio-temporal regions of interest for classification
-- **Grid Search Optimization**: Automated hyperparameter tuning
 - **Configuration-Driven**: YAML-based configuration system for all components
 
 ## System Requirements
