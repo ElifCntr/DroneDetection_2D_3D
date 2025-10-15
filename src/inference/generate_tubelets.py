@@ -13,9 +13,9 @@ import yaml
 
 # your packages
 from detection.background import create as bg_create
-from detection.preprocess import create as pp_create
+from detection.preprocessing import create as pp_create
 from detection.utils import create as ut_create
-from detection.preprocess.roi import adjust_bounding_boxes_to_square
+from detection.preprocessing.roi import adjust_bounding_boxes_to_square
 
 Box = Tuple[int, int, int, int]  # (x, y, w, h)
 

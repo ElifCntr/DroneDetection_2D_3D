@@ -3,10 +3,10 @@
 import os
 import cv2
 from detection.background import create as bg_create
-from detection.preprocess import create as pp_create
+from detection.preprocessing import create as pp_create
 from detection.utils import create as ut_create
-from detection.utils.metrics import iou
-from detection.preprocess.roi import ROI
+from utils.metrics import iou
+from detection.preprocessing.roi import ROI
 
 VIDEO_EXTS = ("*.mp4", "*.avi", "*.mov", "*.mkv")
 

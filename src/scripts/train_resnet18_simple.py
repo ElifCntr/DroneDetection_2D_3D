@@ -12,8 +12,8 @@ import yaml
 # Add project root to path
 sys.path.append('.')
 
-from src.training.datasets.region_dataset import create_2d_dataloaders
-from src.training.models.resnet18_classifier import create_resnet18_model
+from datasets.region_dataset import create_2d_dataloaders
+from models import create_resnet18_model
 from src.training.trainer import Trainer
 
 

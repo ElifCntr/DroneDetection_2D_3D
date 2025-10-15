@@ -182,8 +182,10 @@ mask = bg_subtractor.apply(frame)
 ```
 
 **Preprocessing**
+
 ```python
-from detection.preprocess import create
+from detection.preprocessing import create
+
 preprocessor = create("Threshold", config)
 binary_mask = preprocessor.apply(soft_mask)
 ```

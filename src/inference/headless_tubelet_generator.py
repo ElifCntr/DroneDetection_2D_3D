@@ -6,9 +6,9 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from detection.background import create as bg_create
-from detection.preprocess import create as pp_create
+from detection.preprocessing import create as pp_create
 from detection.utils import create as ut_create
-from detection.utils.metrics import iou
+from utils.metrics import iou
 
 
 def simple_frame_diff(frame, prev_frame, threshold=5):

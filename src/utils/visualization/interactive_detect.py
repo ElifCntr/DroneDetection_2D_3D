@@ -5,7 +5,7 @@ import cv2
 import glob
 import numpy as np
 from detection.background import create as bg_create
-from detection.preprocess import create as pp_create
+from detection.preprocessing import create as pp_create
 from detection.utils import create as ut_create
 
 VIDEO_EXTS = ("*.mp4", "*.avi", "*.mov", "*.mkv")

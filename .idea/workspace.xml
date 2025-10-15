@@ -4,7 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a438f1f1-f632-4374-8b4e-0d27b2c93055" name="Changes" comment="Evaluation scripts and results are added for both ResNet18 and R3D18." />
+    <list default="true" id="a438f1f1-f632-4374-8b4e-0d27b2c93055" name="Changes" comment="Evaluation scripts and results are added for both ResNet18 and R3D18.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/preprocess/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/preprocessing/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/preprocess/blur.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/preprocessing/blur.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/preprocess/contour.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/preprocessing/contour.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/preprocess/merge_contours.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/preprocessing/merge_contours.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/preprocess/morphology.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/preprocessing/morphology.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/preprocess/roi.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/preprocessing/roi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/preprocess/threshold.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/detection/preprocessing/threshold.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/utils/ground_truth.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ground_truth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detection/utils/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inference/detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/detect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inference/generate_tubelets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/generate_tubelets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inference/headless_tubelet_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/headless_tubelet_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/train_resnet18.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/train_resnet18.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/train_resnet18_simple.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/train_resnet18_simple.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/datasets/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasets/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/datasets/frame_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasets/frame_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/datasets/region_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasets/region_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/datasets/tubelet_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasets/tubelet_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/utils/checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/checkpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/utils/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/utils/logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/utils/metrics.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/training/utils/transforms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/visualization/interactive_detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/visualization/interactive_detect.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +51,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ElifCntr"
+  }
+}]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/ElifCntr/DroneDetection_2D_3D.git",
@@ -88,11 +125,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\training" />
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\utils" />
+      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src" />
       <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data\tubelets" />
       <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\data" />
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\inference\evaluation_results" />
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\inference" />
-      <recent name="D:\Elif\Sussex-PhD\Python_Projects\DroneDetection\src\scripts\evaluation_results" />
     </key>
   </component>
   <component name="RunManager">
@@ -154,7 +191,7 @@
       <workItem from="1757173180688" duration="57843000" />
       <workItem from="1759143974494" duration="10202000" />
       <workItem from="1759234620681" duration="9914000" />
-      <workItem from="1760450921770" duration="1623000" />
+      <workItem from="1760450921770" duration="4603000" />
     </task>
     <task id="LOCAL-00001" summary="Evaluation scripts and results are added for both ResNet18 and R3D18.">
       <option name="closed" value="true" />
@@ -164,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760453388117</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Evaluation scripts and results are added for both ResNet18 and R3D18.">
+      <option name="closed" value="true" />
+      <created>1760453585061</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1760453585061</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,7 +249,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/detection/preprocess/contour.py</url>
+          <url>file://$PROJECT_DIR$/src/detection/preprocessing/contour.py</url>
           <line>31</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>

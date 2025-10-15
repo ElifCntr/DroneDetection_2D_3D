@@ -7,15 +7,14 @@ Coordinates dataset loading, model creation, and training loop.
 import argparse
 import torch
 import sys
-import os
 
 # Add src to path for imports
 sys.path.append('..')
 
-from training.datasets.tubelet_dataset import create_dataloaders
-from training.models.r3d_models import get_r3d18
+from datasets.tubelet_dataset import create_dataloaders
+from models import get_r3d18
 from training.trainer import Trainer
-from training.utils.config import load_config, get_training_config, print_config
+from utils.config import load_config, get_training_config, print_config
 
 
 def parse_args():

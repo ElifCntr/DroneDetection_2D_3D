@@ -9,16 +9,14 @@ import sys
 import argparse
 import yaml
 import torch
-import torch.nn as nn
 from datetime import datetime
 import json
 
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.training.datasets.frame_dataset import create_data_loaders
-from src.training.models.resnet18_classifier import create_resnet18_model, save_resnet18_model
-from src.training import trainer  # Reuse your existing trainer
+from datasets import create_data_loaders
+from models import create_resnet18_model, save_resnet18_model
 
 
 def load_video_lists(splits_dir: str):
