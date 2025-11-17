@@ -350,7 +350,7 @@ If you use this code in your research, please cite:
 
 ```bibtex
 @software{drone_detection_2d_3d_2025,
-  author = {Elif Karaca and Phil Birch and Xudong Han and Yueying Tian},
+  author = {Elif UCURUM},
   title = {Drone Detection: 2D vs 3D CNN Comparison for Surveillance Videos},
   year = {2025},
   publisher = {University of Sussex},
