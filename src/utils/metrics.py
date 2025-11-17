@@ -1,92 +1,212 @@
-# src/detection/utils/metrics.py
 """
-Evaluation metrics for object detection tasks.
-- iou: IoU for two boxes (x,y,w,h)
-- match_detections: one-to-one greedy matching by IoU
-- precision / recall / f1_score: computed from one-to-one matches
+Metrics computation utilities for binary classification evaluation.
+Provides functions to compute precision, recall, F1-score, accuracy, and confusion matrix.
 """
-from typing import List, Tuple, Union
 
-Num = Union[int, float]
-Box = Tuple[Num, Num, Num, Num]  # (x, y, width, height)
-
-
-def iou(boxA: Box, boxB: Box) -> float:
-    xA, yA, wA, hA = boxA
-    xB, yB, wB, hB = boxB
-    xA2, yA2 = xA + wA, yA + hA
-    xB2, yB2 = xB + wB, yB + hB
-
-    xi1 = max(xA, xB)
-    yi1 = max(yA, yB)
-    xi2 = min(xA2, xB2)
-    yi2 = min(yA2, yB2)
-
-    inter_w = max(0, xi2 - xi1)
-    inter_h = max(0, yi2 - yi1)
-    inter_area = inter_w * inter_h
-
-    areaA = max(0, wA) * max(0, hA)
-    areaB = max(0, wB) * max(0, hB)
-    union = areaA + areaB - inter_area
-    return float(inter_area / union) if union > 0 else 0.0
+import numpy as np
+from typing import Dict, Tuple, Optional
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    confusion_matrix as sk_confusion_matrix
+)
 
 
-def match_detections(preds: List[Box], gts: List[Box], iou_thresh: float = 0.5):
+def compute_metrics(y_true: np.ndarray,
+                    y_pred: np.ndarray,
+                    average: str = 'binary') -> Dict[str, float]:
     """
-    One-to-one greedy matching (each pred and each GT used at most once).
+    Compute classification metrics.
+
+    Args:
+        y_true: Ground truth labels (numpy array)
+        y_pred: Predicted labels (numpy array)
+        average: Averaging strategy for multi-class ('binary', 'macro', 'weighted')
+
     Returns:
-      matches: list of (pred_idx, gt_idx, iou_val)
-      tp: int, fp: int, fn: int
+        Dictionary containing:
+            - accuracy: Overall accuracy
+            - precision: Precision score
+            - recall: Recall score
+            - f1_score: F1 score
+
+    Example:
+        >>> y_true = np.array([0, 1, 1, 0, 1])
+        >>> y_pred = np.array([0, 1, 0, 0, 1])
+        >>> metrics = compute_metrics(y_true, y_pred)
+        >>> print(f"F1: {metrics['f1_score']:.3f}")
     """
-    if not preds and not gts:
-        return [], 0, 0, 0
-    if not preds:
-        return [], 0, 0, len(gts)
-    if not gts:
-        return [], 0, len(preds), 0
+    metrics = {
+        'accuracy': accuracy_score(y_true, y_pred),
+        'precision': precision_score(y_true, y_pred, average=average, zero_division=0),
+        'recall': recall_score(y_true, y_pred, average=average, zero_division=0),
+        'f1_score': f1_score(y_true, y_pred, average=average, zero_division=0),
+    }
 
-    # Build all candidate pairs with IoU >= thresh
-    pairs = []
-    for pi, p in enumerate(preds):
-        for gi, g in enumerate(gts):
-            i = iou(p, g)
-            if i >= iou_thresh:
-                pairs.append((i, pi, gi))
-
-    # Sort by IoU descending (greedy best-first)
-    pairs.sort(key=lambda x: x[0], reverse=True)
-
-    used_pred = set()
-    used_gt = set()
-    matches = []
-
-    for iou_val, pi, gi in pairs:
-        if pi in used_pred or gi in used_gt:
-            continue
-        used_pred.add(pi)
-        used_gt.add(gi)
-        matches.append((pi, gi, float(iou_val)))
-
-    tp = len(matches)
-    fp = len(preds) - tp
-    fn = len(gts) - tp
-    return matches, tp, fp, fn
+    return metrics
 
 
-def precision(preds: List[Box], gts: List[Box], iou_thresh: float = 0.5) -> float:
-    _, tp, fp, _ = match_detections(preds, gts, iou_thresh)
-    denom = tp + fp
-    return float(tp / denom) if denom > 0 else 0.0
+def compute_confusion_matrix(y_true: np.ndarray,
+                             y_pred: np.ndarray) -> Dict[str, int]:
+    """
+    Compute confusion matrix components.
+
+    Args:
+        y_true: Ground truth labels
+        y_pred: Predicted labels
+
+    Returns:
+        Dictionary containing:
+            - TP: True positives
+            - FP: False positives
+            - TN: True negatives
+            - FN: False negatives
+
+    Example:
+        >>> cm = compute_confusion_matrix(y_true, y_pred)
+        >>> print(f"TP: {cm['TP']}, FP: {cm['FP']}")
+    """
+    cm = sk_confusion_matrix(y_true, y_pred)
+
+    # For binary classification
+    if cm.shape == (2, 2):
+        tn, fp, fn, tp = cm.ravel()
+        return {
+            'TN': int(tn),
+            'FP': int(fp),
+            'FN': int(fn),
+            'TP': int(tp)
+        }
+    else:
+        # Multi-class: return full matrix
+        return {'confusion_matrix': cm}
 
 
-def recall(preds: List[Box], gts: List[Box], iou_thresh: float = 0.5) -> float:
-    _, tp, _, fn = match_detections(preds, gts, iou_thresh)
-    denom = tp + fn
-    return float(tp / denom) if denom > 0 else 0.0
+def compute_all_metrics(y_true: np.ndarray,
+                        y_pred: np.ndarray,
+                        y_proba: Optional[np.ndarray] = None) -> Dict[str, float]:
+    """
+    Compute comprehensive set of metrics.
+
+    Args:
+        y_true: Ground truth labels
+        y_pred: Predicted labels
+        y_proba: Predicted probabilities (optional, for ROC/AUC)
+
+    Returns:
+        Dictionary with all available metrics
+
+    Example:
+        >>> metrics = compute_all_metrics(y_true, y_pred, y_proba)
+        >>> for name, value in metrics.items():
+        ...     print(f"{name}: {value:.4f}")
+    """
+    # Basic metrics
+    metrics = compute_metrics(y_true, y_pred)
+
+    # Confusion matrix
+    cm = compute_confusion_matrix(y_true, y_pred)
+    metrics.update(cm)
+
+    # Derived metrics
+    if 'TP' in cm and 'FP' in cm and 'TN' in cm and 'FN' in cm:
+        tp, fp, tn, fn = cm['TP'], cm['FP'], cm['TN'], cm['FN']
+
+        # Specificity
+        if (tn + fp) > 0:
+            metrics['specificity'] = tn / (tn + fp)
+
+        # False positive rate
+        if (fp + tn) > 0:
+            metrics['fpr'] = fp / (fp + tn)
+
+        # False negative rate
+        if (fn + tp) > 0:
+            metrics['fnr'] = fn / (fn + tp)
+
+    # AUC-ROC if probabilities provided
+    if y_proba is not None:
+        try:
+            from sklearn.metrics import roc_auc_score
+            if len(np.unique(y_true)) == 2:  # Binary only
+                metrics['auc_roc'] = roc_auc_score(y_true, y_proba)
+        except Exception as e:
+            print(f"[WARNING] Could not compute AUC-ROC: {e}")
+
+    return metrics
 
 
-def f1_score(preds: List[Box], gts: List[Box], iou_thresh: float = 0.5) -> float:
-    p = precision(preds, gts, iou_thresh)
-    r = recall(preds, gts, iou_thresh)
-    return float(2 * p * r / (p + r)) if (p + r) > 0 else 0.0
+def print_metrics(metrics: Dict[str, float], title: str = "Metrics") -> None:
+    """
+    Pretty print metrics.
+
+    Args:
+        metrics: Dictionary of metrics
+        title: Title to display
+
+    Example:
+        >>> print_metrics(metrics, "Validation Metrics")
+    """
+    print(f"\n{title}:")
+    print("=" * 50)
+    for name, value in metrics.items():
+        if isinstance(value, (int, float)):
+            if isinstance(value, float):
+                print(f"  {name:15s}: {value:.4f}")
+            else:
+                print(f"  {name:15s}: {value}")
+    print("=" * 50)
+
+
+def compute_threshold_metrics(y_true: np.ndarray,
+                              y_proba: np.ndarray,
+                              thresholds: np.ndarray) -> Dict[str, np.ndarray]:
+    """
+    Compute metrics across multiple thresholds.
+
+    Args:
+        y_true: Ground truth labels
+        y_proba: Predicted probabilities
+        thresholds: Array of thresholds to evaluate
+
+    Returns:
+        Dictionary with metrics arrays for each threshold
+
+    Example:
+        >>> thresholds = np.arange(0.1, 1.0, 0.1)
+        >>> results = compute_threshold_metrics(y_true, y_proba, thresholds)
+        >>> best_idx = np.argmax(results['f1_scores'])
+        >>> print(f"Best threshold: {thresholds[best_idx]:.2f}")
+    """
+    precisions = []
+    recalls = []
+    f1_scores = []
+    accuracies = []
+
+    for threshold in thresholds:
+        y_pred = (y_proba >= threshold).astype(int)
+        metrics = compute_metrics(y_true, y_pred)
+
+        precisions.append(metrics['precision'])
+        recalls.append(metrics['recall'])
+        f1_scores.append(metrics['f1_score'])
+        accuracies.append(metrics['accuracy'])
+
+    return {
+        'thresholds': thresholds,
+        'precisions': np.array(precisions),
+        'recalls': np.array(recalls),
+        'f1_scores': np.array(f1_scores),
+        'accuracies': np.array(accuracies),
+    }
+
+
+__all__ = [
+    'compute_metrics',
+    'compute_confusion_matrix',
+    'compute_all_metrics',
+    'print_metrics',
+    'compute_threshold_metrics',
+]

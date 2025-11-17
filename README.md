@@ -1,258 +1,323 @@
-# Drone Detection System
+# Drone Detection in Surveillance Videos: 2D vs 3D CNN Comparison
 
-A comprehensive video-based drone detection system that combines computer vision and 3D convolutional neural networks. The system processes video streams to identify drone objects through a multi-stage pipeline: background subtraction → preprocessing → tubelet generation → 3D CNN classification.
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+**A comprehensive comparison of 2D and 3D CNN approaches for drone detection in surveillance videos.**
 
-- **Multiple Background Subtraction Methods**: MOG2 and ViBe algorithms for motion detection
-- **Advanced Preprocessing Pipeline**: Configurable thresholding, morphological operations, and contour detection
-- **2D CNN and 3D CNN Classification**: ResNet18 and R3D-18 architectures for temporal feature learning
-- **Tubelet Generation**: Extracts spatio-temporal regions of interest for classification
-- **Configuration-Driven**: YAML-based configuration system for all components
+## 📋 Overview
 
-## System Requirements
+This project implements and compares two deep learning approaches for detecting drones in surveillance video footage:
+- **2D CNN (ResNet-18)**: Spatial feature extraction from individual frames
+- **3D CNN (R3D-18)**: Spatiotemporal feature extraction from frame sequences
 
-- Python 3.8+
-- CUDA-compatible GPU (recommended for training)
-- OpenCV 4.9+
-- PyTorch 2.0+
+Our research demonstrates that 2D spatial models can outperform 3D temporal models for drone detection in static surveillance scenarios, achieving **95.54% F1-score** compared to 86.54% for 3D models.
 
-## Installation
+## 🎯 Key Features
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/drone-detection.git
-cd drone-detection
-```
+- **Dual Architecture Comparison**: Side-by-side evaluation of 2D and 3D CNN approaches
+- **Comprehensive Pipeline**: Complete workflow from data preprocessing to evaluation
+- **Production-Ready Code**: Modular, well-documented, and extensively tested
+- **Flexible Configuration**: YAML-based configuration system for easy experimentation
+- **Rich Visualization**: Comprehensive evaluation plots and metrics
+- **GPU Accelerated**: Optimized for CUDA-enabled training and inference
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+## 📊 Results Summary
 
-3. Install the package in development mode:
-```bash
-pip install -e .
-```
+### Model Performance on Test Set (14,946 samples)
 
-## Quick Start
+| Model | F1-Score | Accuracy | Precision | Recall | Training Time |
+|-------|----------|----------|-----------|--------|---------------|
+| **ResNet-18 (2D)** | **95.54%** | **95.38%** | **95.82%** | **95.38%** | 6 min/epoch |
+| R3D-18 (3D) | 86.54% | 84.30% | 91.15% | 84.30% | 12 min/epoch |
 
-### Basic Detection
+**Key Findings:**
+- 2D models achieve 9% higher F1-score than 3D models
+- 2D models are 2× faster to train
+- Spatial features alone are sufficient for static camera surveillance
+- Lower false negative rate with 2D approach (210 vs 306)
 
-```python
-from detection import create_pipeline
-import yaml
+## 🚀 Quick Start
 
-# Load configuration
-with open('configs/experiment.yaml', 'r') as f:
-    config = yaml.safe_load(f)
-
-# Create detection pipeline
-pipeline = create_pipeline(config)
-
-# Process video
-results = pipeline.process_video('path/to/video.mp4')
-```
-
-### Training a Model
+### Prerequisites
 
 ```bash
-python scripts/train.py --exp_config configs/experiment.yaml --clf_config configs/classifier.yaml
+Python 3.8+
+CUDA 11.8+ (for GPU acceleration)
+8GB+ GPU RAM recommended
 ```
 
-### Running Grid Search
+### Installation
 
+1. **Clone the repository**
 ```bash
-python scripts/grid_search.py --config configs/experiment.yaml
+git clone https://github.com/yourusername/DroneDetection_2D_3D.git
+cd DroneDetection_2D_3D
 ```
 
-## Architecture
-
-### Pipeline Overview
-
-```
-Video Input → Background Subtraction → Preprocessing → Tubelet Generation → 3D CNN → Detection Results
+2. **Create conda environment**
+```bash
+conda create -n drone-detection python=3.8
+conda activate drone-detection
 ```
 
-### Components
+3. **Install dependencies**
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install opencv-python scikit-learn pandas matplotlib seaborn pyyaml tqdm
+```
 
-- **Background Subtraction** (`src/detection/background/`):
-  - MOG2: Mixture of Gaussians background subtractor
-  - ViBe: Visual Background Extractor
+4. **Verify installation**
+```bash
+python test_imports.py
+```
 
-- **Preprocessing** (`src/detection/preprocess/`):
-  - Thresholding (fixed/Otsu)
-  - Morphological operations
-  - Contour detection and merging
-  - ROI extraction
+## 📁 Project Structure
 
-- **Classification** (`src/detection/classifier/`):
-  - R3D-18: ResNet3D backbone
-  - R(2+1)D: Spatiotemporal factorized convolutions
+```
+DroneDetection_2D_3D/
+├── src/                          # Source code
+│   ├── datasets/                 # Dataset loaders
+│   │   ├── frame_dataset.py     # Single frame dataset
+│   │   ├── region_dataset.py    # 2D region dataset
+│   │   └── tubelet_dataset.py   # 3D tubelet dataset
+│   ├── models/                   # Model architectures
+│   │   ├── resnet18.py          # 2D ResNet-18
+│   │   └── r3d18.py             # 3D R3D-18
+│   ├── training/                 # Training utilities
+│   │   └── trainer.py           # Training loop
+│   ├── evaluation/               # Evaluation tools
+│   ├── inference/                # Inference pipeline
+│   └── utils/                    # Utility functions
+│       ├── visualization/        # Plotting tools
+│       ├── checkpoint.py        # Model checkpointing
+│       ├── config.py            # Config loading
+│       ├── logging.py           # Logging utilities
+│       └── metrics.py           # Evaluation metrics
+├── scripts/                      # Executable scripts
+│   ├── train_2d.py              # Train 2D model
+│   ├── train_3d.py              # Train 3D model
+│   ├── evaluate_2d.py           # Evaluate 2D model
+│   └── evaluate_3d.py           # Evaluate 3D model
+├── configs/                      # Configuration files
+│   └── experiment.yaml          # Training configuration
+├── data/                         # Data directory
+│   ├── raw/                     # Raw video files
+│   ├── annotations/             # Ground truth annotations
+│   ├── 2d_regions/              # Extracted 2D regions
+│   └── tubelets/                # Generated 3D tubelets
+├── outputs/                      # Training outputs
+│   ├── checkpoints/             # Saved models
+│   ├── logs/                    # Training logs
+│   └── evaluation/              # Evaluation results
+├── test_imports.py              # Test installation
+├── visualize_test_results.py   # Visualization script
+└── README.md                    # This file
+```
 
-- **Optimization** (`src/detection/optimization/`):
-  - Grid search for hyperparameter tuning
-  - Custom scoring functions
+## 🎓 Usage
 
-## Configuration
+### 1. Data Preparation
 
-The system uses YAML configuration files for all components:
+Place your data in the following structure:
+```bash
+data/
+├── raw/                    # Raw video files (.mp4)
+├── annotations/            # Ground truth bounding boxes (.txt)
+└── splits/
+    ├── train_videos.txt   # Training video list
+    ├── val_videos.txt     # Validation video list
+    └── test_videos.txt    # Test video list
+```
 
-### Main Configuration (`configs/experiment.yaml`)
+### 2. Training
+
+#### Train 2D Model (ResNet-18)
+```bash
+python scripts/train_2d.py \
+    --config configs/experiment.yaml \
+    --train-csv data/2d_regions/train/train_2d_index.csv \
+    --val-csv data/2d_regions/val/val_2d_index.csv \
+    --epochs 50 \
+    --batch-size 32 \
+    --gpu 0 \
+    --experiment-name resnet18_experiment
+```
+
+#### Train 3D Model (R3D-18)
+```bash
+python scripts/train_3d.py \
+    --config configs/experiment.yaml \
+    --train-csv data/tubelets/train_index.csv \
+    --val-csv data/tubelets/val_index.csv \
+    --epochs 50 \
+    --batch-size 16 \
+    --gpu 0 \
+    --experiment-name r3d18_experiment
+```
+
+### 3. Evaluation
+
+#### Evaluate 2D Model
+```bash
+python scripts/evaluate_2d.py \
+    --config configs/experiment.yaml \
+    --checkpoint outputs/checkpoints/resnet18_experiment/best.pth \
+    --test-csv data/2d_regions/test/test_2d_index.csv \
+    --output-dir outputs/evaluation/resnet18 \
+    --gpu 0 \
+    --save-predictions
+```
+
+#### Evaluate 3D Model
+```bash
+python scripts/evaluate_3d.py \
+    --config configs/experiment.yaml \
+    --checkpoint outputs/checkpoints/r3d18_experiment/best.pth \
+    --test-csv data/tubelets/test_index.csv \
+    --output-dir outputs/evaluation/r3d18 \
+    --gpu 0 \
+    --save-predictions
+```
+
+### 4. Visualization
+
+Generate evaluation plots:
+```bash
+python visualize_test_results.py
+```
+
+Outputs:
+- `confusion_matrix.png` - Confusion matrix heatmap
+- `roc_curve.png` - ROC curve with AUC
+- `pr_curve.png` - Precision-Recall curve
+- `metrics_bars.png` - Metrics comparison
+- `per_class_metrics.png` - Per-class performance
+
+## 📊 Configuration
+
+Edit `configs/experiment.yaml` to customize:
+
 ```yaml
-paths:
-  input_video_dir: "data/raw"
-  annotations_dir: "data/annotations"
-  tubelets_dir: "data/tubelets"
+training:
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
 
-background:
-  method: "MOG2"
-  mog2:
-    history: 200
-    var_threshold: 12
+model:
+  name: resnet18  # or r3d18
+  num_classes: 2
+  pretrained: true
+  freeze_backbone: true
+  dropout: 0.5
 
-classifier:
-  method: "r3d18"
-  R3D18:
-    pretrained: true
-    num_classes: 2
+evaluation:
+  batch_size: 32
+  save_predictions: true
+  save_visualizations: true
 ```
 
-### Component-Specific Configs
-- `configs/background.yaml`: Background subtraction parameters
-- `configs/classifier.yaml`: Model training configuration
+## 🔬 Research Context
 
-## Data Format
+This work is part of a PhD research project at the **University of Sussex** investigating efficient drone detection methods for surveillance applications.
 
-### Input Data
-- **Videos**: MP4, AVI, MOV formats in `data/raw/`
-- **Annotations**: CSV format with frame-level bounding boxes
-- **Splits**: Text files listing train/validation/test videos
+**Dataset**: 37 static surveillance videos from the Drone-vs-Bird Detection Challenge
+- **Training**: 30,967 samples
+- **Validation**: 10,756 samples  
+- **Test**: 14,946 samples
+- **Class distribution**: 10.5% positive (drone), 89.5% negative (background)
 
-### Generated Data
-- **Tubelets**: 3D numpy arrays (T×H×W×C) saved as `.npy` files
-- **Indexes**: CSV files mapping tubelet paths to labels
+## 📈 Detailed Results
 
-## Training
+### Confusion Matrix (2D Model)
 
-### Data Preparation
-
-1. Place videos in `data/raw/`
-2. Add annotations in `data/annotations/`
-3. Create data splits in `data/splits/`
-4. Generate tubelets:
-```bash
-python scripts/generate_tubelets.py --config configs/experiment.yaml
+```
+                 Predicted
+              Background  Drone
+Actual  
+Background     12,892      480
+Drone             210    1,364
 ```
 
-### Model Training
+### Per-Class Metrics
 
-```bash
-python scripts/train.py \
-  --exp_config configs/experiment.yaml \
-  --clf_config configs/classifier.yaml \
-  --gpu 0
-```
+| Class | Precision | Recall | F1-Score |
+|-------|-----------|--------|----------|
+| Background | 98.40% | 96.41% | 97.39% |
+| Drone | 73.97% | 86.66% | 79.81% |
 
-### Hyperparameter Optimization
+## 🛠️ Development
+
+### Running Tests
 
 ```bash
-python scripts/grid_search.py --config configs/experiment.yaml
+# Test all imports
+python test_imports.py
+
+# Test all components
+python test_all_components.py
+
+# Test data loading
+python test_data_loading.py
 ```
 
-## Evaluation
+### Code Organization
 
-```bash
-python scripts/evaluate.py \
-  --config configs/experiment.yaml \
-  --checkpoint models/best_f1.pt \
-  --test_video data/raw/test_video.mp4
-```
+- **Modular Design**: Clear separation of concerns
+- **Factory Pattern**: Easy model/dataset creation
+- **Configuration-Driven**: YAML-based configuration
+- **Type Hints**: Full type annotations throughout
+- **Documentation**: Comprehensive docstrings
 
-## API Reference
+## 🤝 Contributing
 
-### Core Classes
-
-**Background Subtraction**
-```python
-from detection.background import create
-bg_subtractor = create("MOG2", config)
-mask = bg_subtractor.apply(frame)
-```
-
-**Preprocessing**
-
-```python
-from detection.preprocessing import create
-
-preprocessor = create("Threshold", config)
-binary_mask = preprocessor.apply(soft_mask)
-```
-
-**Classification**
-```python
-from detection.classifier import create
-model = create("r3d18", config)
-predictions = model(tubelet_batch)
-```
-
-## Known Issues
-
-- **Label Correction Required**: Some generated tubelets may have incorrect labels (IoU > 0 but label = 0). Use the provided correction script before training.
-- **Path Dependencies**: Ensure all file paths in configuration match your directory structure.
-
-## Contributing
-
+Contributions are welcome! Please:
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -am 'Add new feature'`)
-4. Push to branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-## Development Setup
+## 📝 Citation
 
-For development, install additional dependencies:
-```bash
-pip install pytest jupyter
-```
-
-Run tests:
-```bash
-pytest tests/
-```
-
-## Performance
-
-### Typical Results
-- **Detection Rate**: 85-95% on test videos
-- **False Positive Rate**: 5-15% depending on configuration
-- **Processing Speed**: 15-30 FPS (GPU), 2-5 FPS (CPU)
-
-### Optimization Tips
-- Use GPU for training and inference
-- Adjust background subtraction sensitivity for your environment
-- Tune preprocessing parameters for your video quality
-- Consider frame rate reduction for real-time applications
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with PyTorch and OpenCV
-- Background subtraction algorithms from OpenCV
-- 3D CNN architectures from torchvision
-
-## Citation
-
-If you use this work in your research, please cite:
+If you use this code in your research, please cite:
 
 ```bibtex
-@misc{drone-detection-2024,
-  title={Video-based Drone Detection using 3D CNNs},
-  author={Your Name},
-  year={2024},
-  url={https://github.com/yourusername/drone-detection}
+@software{drone_detection_2d_3d,
+  author = {Elif Karaca},
+  title = {Drone Detection in Surveillance Videos: 2D vs 3D CNN Comparison},
+  year = {2025},
+  institution = {University of Sussex},
+  url = {https://github.com/yourusername/DroneDetection_2D_3D}
 }
 ```
+
+## 👥 Authors
+
+**Elif Karaca**  
+PhD Student, University of Sussex  
+Supervisor: Dr. Phil Birch
+
+Co-authors: Xudong Han, Yueying Tian
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- University of Sussex for computational resources
+- YLSY scholarship funding
+- Drone-vs-Bird Detection Challenge for the dataset
+- PyTorch and torchvision teams for the frameworks
+
+## 📧 Contact
+
+For questions or collaborations:
+- Email: [your.email@sussex.ac.uk]
+- GitHub Issues: [Project Issues](https://github.com/yourusername/DroneDetection_2D_3D/issues)
+
+---
+
+**⭐ If you find this work useful, please star the repository!**

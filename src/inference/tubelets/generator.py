@@ -1,4 +1,4 @@
-# src/inference/generate_tubelets.py
+# src/inference/tubelets/generator.py
 
 from __future__ import annotations
 import os

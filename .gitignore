@@ -1,12 +1,8 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -27,120 +23,113 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
+# Virtual Environment
+.venv/
 venv/
 ENV/
+env/
 env.bak/
 venv.bak/
 
-# Spyder project settings
-.spyderproject
-.spyproject
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+*.iml
 
-# Rope project settings
-.ropeproject
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
 
-# mkdocs documentation
-/site
+# PyCharm
+.idea/
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+# Data & Outputs
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/2d_regions/*
+!data/2d_regions/.gitkeep
+data/tubelets/*
+!data/tubelets/.gitkeep
+data/annotations/*
+!data/annotations/.gitkeep
 
-# Pyre type checker
-.pyre/
+# Results
+results/
+outputs/
+experiments/
+logs/
+*.log
 
-# Custom project ignores
-# Data files (too large for git)
-data/annotations
-data/raw/
-data/tubelets/
+# Models (keep structure, ignore weights)
+models/*/
+!models/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pkl
+*.pickle
+
+# Qualitative analysis outputs
+qualitative_analysis/
+r3d18_qualitative_analysis/
+
+# Media files
 *.mp4
 *.avi
 *.mov
 *.mkv
+*.npy
+*.npz
+
+# CSV outputs (keep templates)
+*_results.csv
+*_predictions.csv
+*_evaluation.csv
+*_tubelet_results.csv
+
+# Plots and visualizations
 *.png
 *.jpg
 *.jpeg
+!docs/*.png
+!docs/*.jpg
 
-r3d_qualitative_analysis/representative_frames
-
-# Model checkpoints and outputs
-output/
-models/
-*.pt
-*.pth
-*.ckpt
-
-# Environment files
-env_full.yaml
-environment.yml
-conda-env.yaml
-
-# Debug and temporary files
-debug_paths.py
-*_debug.csv
-evaluation_results.csv
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS files
+# OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# Logs
-*.log
-logs/
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Documentation
+docs/_build/
+site/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Config overrides (keep templates)
+configs/local_*.yaml
+configs/private_*.yaml

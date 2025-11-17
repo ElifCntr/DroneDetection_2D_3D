@@ -1,4 +1,4 @@
-# src/training/datasets/tubelet_dataset.py
+# src/datasets/tubelet_dataset.py
 """
 Loads 3-frame tubelet sequences (.npy files) for 3D CNN training.
 Converts (T,H,W,C) format to (C,T,H,W) PyTorch format.
@@ -9,6 +9,7 @@ import os
 import numpy as np
 import torch
 from torch.utils.data import Dataset
+from pathlib import Path
 
 
 class TubeletDataset(Dataset):
@@ -19,11 +20,11 @@ class TubeletDataset(Dataset):
     Output format: (C, T, H, W) tensors for PyTorch 3D CNN
     """
 
-    def __init__(self, csv_path, root_dir, transform=None, normalize=True):
+    def __init__(self, csv_path, root_dir=None, transform=None, normalize=True):
         """
         Args:
-            csv_path: Path to CSV index file with columns [path, label]
-            root_dir: Root directory containing tubelet files
+            csv_path: Path to CSV index file with columns [path, label] or [filename, label]
+            root_dir: Root directory containing tubelet files (optional if CSV has full paths)
             transform: Optional transforms to apply
             normalize: Whether to normalize pixel values to [0,1]
         """
@@ -42,7 +43,8 @@ class TubeletDataset(Dataset):
         samples = []
 
         with open(csv_path, 'r') as f:
-            lines = f.readlines()[1:]  # Skip header
+            header = f.readline().strip()
+            lines = f.readlines()
 
         for line in lines:
             line = line.strip()
@@ -51,15 +53,13 @@ class TubeletDataset(Dataset):
 
             parts = line.split(',')
             if len(parts) >= 2:
-                rel_path = parts[0]
+                file_path = parts[0]
                 label = int(parts[1])
 
-                # Strip root directory prefix if it exists in CSV
-                # (handles case where CSV has full paths from project root)
-                if rel_path.startswith("data/tubelets/"):
-                    rel_path = rel_path[len("data/tubelets/"):]
+                # Normalize path separators to forward slashes
+                file_path = file_path.replace('\\', '/')
 
-                samples.append((rel_path, label))
+                samples.append((file_path, label))
 
         return samples
 
@@ -86,11 +86,20 @@ class TubeletDataset(Dataset):
                 - tubelet_tensor: shape (C, T, H, W)
                 - label: int
         """
-        rel_path, label = self.samples[idx]
+        file_path, label = self.samples[idx]
 
-        # Use pathlib for proper cross-platform path handling
-        from pathlib import Path
-        tubelet_path = Path(self.root_dir) / rel_path
+        # Smart path handling:
+        # If path starts with 'data/', it's already a full path from project root
+        # Otherwise, it's relative to root_dir
+        if file_path.startswith('data/'):
+            # Already a full path from project root
+            tubelet_path = Path(file_path)
+        elif self.root_dir is not None:
+            # Relative path - add root_dir
+            tubelet_path = Path(self.root_dir) / file_path
+        else:
+            # No root_dir and not absolute - use as-is
+            tubelet_path = Path(file_path)
 
         # Load tubelet
         try:
@@ -116,14 +125,14 @@ class TubeletDataset(Dataset):
         return tubelet_tensor, label
 
 
-def create_dataloaders(train_csv, val_csv, root_dir, batch_size=32, num_workers=4):
+def create_dataloaders(train_csv, val_csv, root_dir=None, batch_size=32, num_workers=4):
     """
     Create training and validation data loaders.
 
     Args:
         train_csv: Path to training CSV index
         val_csv: Path to validation CSV index
-        root_dir: Root directory for tubelet files
+        root_dir: Root directory for tubelet files (optional if CSVs have full paths)
         batch_size: Batch size for training
         num_workers: Number of workers for data loading
 

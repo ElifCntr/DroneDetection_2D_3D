@@ -1,4 +1,4 @@
-# src/inference/headless_tubelet_generator.py - No PIL dependencies
+# src/inference/tubelets/generator_optimized.py - No PIL dependencies
 
 import os
 import cv2

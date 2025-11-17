@@ -1,14 +1,52 @@
-# src/detection/inference/interactive_detect.py - CLEAN VERSION
+"""
+Interactive Background Subtraction (BGS) visualization tool.
+Allows frame-by-frame inspection of detection pipeline with ground truth overlay.
+"""
 
 import os
 import cv2
 import glob
 import numpy as np
+import sys
+
+# Add src to path if needed
+if 'src' not in sys.path:
+    src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+    sys.path.insert(0, src_path)
+
 from detection.background import create as bg_create
 from detection.preprocessing import create as pp_create
-from detection.utils import create as ut_create
 
 VIDEO_EXTS = ("*.mp4", "*.avi", "*.mov", "*.mkv")
+
+
+def load_ground_truth(gt_file: str):
+    """
+    Load ground truth bounding boxes from annotation file.
+
+    Args:
+        gt_file: Path to ground truth txt file
+
+    Returns:
+        Dictionary mapping frame_idx to list of boxes [(x, y, w, h), ...]
+    """
+    gt_boxes = {}
+
+    if not os.path.exists(gt_file):
+        raise FileNotFoundError(f"Ground truth file not found: {gt_file}")
+
+    with open(gt_file, 'r') as f:
+        for line in f:
+            parts = line.strip().split(',')
+            if len(parts) >= 5:
+                frame_idx = int(parts[0]) - 1  # Convert to 0-indexed
+                x, y, w, h = map(int, parts[1:5])
+
+                if frame_idx not in gt_boxes:
+                    gt_boxes[frame_idx] = []
+                gt_boxes[frame_idx].append((x, y, w, h))
+
+    return gt_boxes
 
 
 def load_video_list_from_splits(splits_file_path: str, split_name: str = "test"):
@@ -76,10 +114,9 @@ def interactive_process_video(video_path: str, cfg: dict):
     ann_dir = cfg["paths"]["annotations"]
     video_id = os.path.splitext(os.path.basename(video_path))[0]
     gt_file = os.path.join(ann_dir, f"{video_id}.txt")
-    gt_mod = ut_create("ground_truth")
 
     try:
-        gt_boxes = gt_mod.load_ground_truth(gt_file)
+        gt_boxes = load_ground_truth(gt_file)
         print(f"[INFO] Ground-truth loaded for {video_id}")
     except FileNotFoundError:
         print(f"[WARN] No ground-truth file for {video_id}")
@@ -117,18 +154,16 @@ def interactive_process_video(video_path: str, cfg: dict):
         binary_mask = thr.apply(raw_mask)
 
         # ADAPTIVE LOGIC - Check noise level BEFORE final processing
-        # Quick contour count to determine filtering approach
         quick_contours, _ = cv2.findContours(binary_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         quick_count = len(quick_contours)
 
-        # Apply adaptive settings IMMEDIATELY
-        if quick_count > 150:  # Threshold for switching to aggressive
+        # Apply adaptive settings
+        if quick_count > 150:
             # AGGRESSIVE SETTINGS
             morph._min_area = 50
             morph._open_kernel = 1
             morph._close_kernel = 5
             blur._ksize = 3
-            # Update BGS variance threshold for next frame
             bg._var_threshold = 16
             filter_mode = "aggressive"
             print(f"[ADAPTIVE] Switching to AGGRESSIVE mode ({quick_count} initial contours)")
@@ -138,7 +173,6 @@ def interactive_process_video(video_path: str, cfg: dict):
             morph._open_kernel = 1
             morph._close_kernel = 5
             blur._ksize = 1
-            # Update BGS variance threshold for next frame
             bg._var_threshold = 12
             filter_mode = "gentle"
             print(f"[ADAPTIVE] Using GENTLE mode ({quick_count} initial contours)")
@@ -153,19 +187,10 @@ def interactive_process_video(video_path: str, cfg: dict):
         else:
             cleaned_mask, raw_boxes, _ = morph_result
 
-        '''# Merge overlapping/close contours
-        merged_boxes = merge.apply(raw_boxes)
-
+        # Skip merging for now
+        merged_boxes = raw_boxes
         num_detections = len(raw_boxes)
         num_merged = len(merged_boxes)
-
-        print(f"[MERGE] Raw boxes: {num_detections} → Merged boxes: {num_merged}")
-
-        print(
-            f"[INFO] Frame {frame_idx}: {mode_text} | {filter_mode} | Raw: {num_detections} → Merged: {num_merged} detections")
-        '''
-        # In your interactive_detect.py, skip merging:
-        merged_boxes = raw_boxes  # Skip merging
 
         # Get ground truth
         gts = gt_boxes.get(frame_idx, [])
@@ -177,7 +202,7 @@ def interactive_process_video(video_path: str, cfg: dict):
 
         # Draw detections on original
         detections_display = original.copy()
-        for (x, y, w, h) in merged_boxes:  # Use merged boxes instead of raw boxes
+        for (x, y, w, h) in merged_boxes:
             x_s, y_s, w_s, h_s = int(x * scale), int(y * scale), int(w * scale), int(h * scale)
             cv2.rectangle(detections_display, (x_s, y_s), (x_s + w_s, y_s + h_s), (0, 255, 0), 2)
 
@@ -255,3 +280,11 @@ def test_bgs_interactive(cfg: dict, video_path: str = None, splits_file: str = N
         interactive_process_video(video_path, cfg)
     else:
         run_interactive_detection(cfg, splits_file)
+
+
+__all__ = [
+    'interactive_process_video',
+    'run_interactive_detection',
+    'test_bgs_interactive',
+    'load_ground_truth',
+]

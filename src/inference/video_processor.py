@@ -1,4 +1,4 @@
-# src/detection/inference/detect.py
+# src/detection/inference/video_processor.py
 
 import os
 import cv2

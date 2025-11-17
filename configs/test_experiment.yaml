@@ -1,0 +1,86 @@
+# Test Configuration - Safe for testing without overwriting production data
+# Uses separate TEST_* directories for all outputs
+
+paths:
+  # READ-ONLY paths (your existing data - we only read from these)
+  input_video_dir: data/raw
+  annotations_dir: data/annotations
+  
+  # Dataset paths
+  tubelets_dir: data/tubelets
+  
+  # Splits
+  splits:
+    train_list: data/splits/train_videos.txt
+    val_list: data/splits/val_videos.txt
+    test_list: data/splits/test_videos.txt
+
+# Dataset configuration
+dataset:
+  train_csv: data/tubelets/train_index.csv
+  val_csv: data/tubelets/val_index.csv
+  test_csv: data/tubelets/test_index.csv
+
+# Training configuration
+training:
+  batch_size: 16
+  epochs: 2  # Just 2 epochs for testing
+  learning_rate: 0.001
+  device: cuda
+  num_workers: 4
+  
+  # TEST OUTPUT paths (separate from production)
+  checkpoint_dir: outputs/TEST_checkpoints
+  log_dir: outputs/TEST_logs
+  
+  # Optimizer
+  optimizer: Adam
+  weight_decay: 0.0001
+  
+  # Scheduler
+  scheduler: ReduceLROnPlateau
+  patience: 3
+  factor: 0.5
+
+# Model configuration
+model:
+  name: resnet18  # or r3d18 for 3D model
+  num_classes: 2
+  pretrained: true
+  freeze_backbone: true
+  dropout: 0.5
+
+# Evaluation configuration
+evaluation:
+  output_dir: outputs/TEST_evaluation
+  save_predictions: true
+  save_visualizations: true
+  batch_size: 32
+
+# Background subtraction (for detection pipeline)
+background:
+  method: MOG2
+  var_threshold: 16
+  detect_shadows: false
+
+# Preprocessing
+preprocess:
+  threshold:
+    value: 127
+  blur:
+    ksize: 3
+  morphology:
+    open_kernel: 3
+    close_kernel: 5
+    min_area: 100
+
+# Visualization
+visualize:
+  scale_factor: 0.3
+
+# Data augmentation (for training)
+augmentation:
+  enabled: true
+  random_flip: 0.5
+  random_rotation: 10
+  color_jitter: 0.1
