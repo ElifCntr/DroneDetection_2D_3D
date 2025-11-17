@@ -1,42 +1,45 @@
-# Drone Detection in Surveillance Videos: 2D vs 3D CNN Comparison
+# Drone Detection: 2D vs 3D CNN Comparison
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**A comprehensive comparison of 2D and 3D CNN approaches for drone detection in surveillance videos.**
+**Comparative study of 2D and 3D CNN approaches for drone detection in surveillance videos using adaptive background subtraction.**
 
 ## 📋 Overview
 
-This project implements and compares two deep learning approaches for detecting drones in surveillance video footage:
-- **2D CNN (ResNet-18)**: Spatial feature extraction from individual frames
-- **3D CNN (R3D-18)**: Spatiotemporal feature extraction from frame sequences
+This project implements and compares two deep learning approaches for detecting drones in surveillance videos:
+- **2D CNN (ResNet-18)**: Frame-by-frame spatial feature extraction
+- **3D CNN (R3D-18)**: Spatiotemporal feature extraction from 3-frame sequences
 
-Our research demonstrates that 2D spatial models can outperform 3D temporal models for drone detection in static surveillance scenarios, achieving **95.54% F1-score** compared to 86.54% for 3D models.
+Both approaches employ **adaptive background subtraction (BGS)** with MOG2 for motion-based candidate region proposal, followed by deep learning classification. Our research on the Drone-vs-Bird Detection Challenge dataset demonstrates that **2D spatial analysis outperforms 3D temporal modeling**, achieving **94.9% F1-score** compared to 83.8% for 3D.
 
 ## 🎯 Key Features
 
-- **Dual Architecture Comparison**: Side-by-side evaluation of 2D and 3D CNN approaches
-- **Comprehensive Pipeline**: Complete workflow from data preprocessing to evaluation
-- **Production-Ready Code**: Modular, well-documented, and extensively tested
-- **Flexible Configuration**: YAML-based configuration system for easy experimentation
-- **Rich Visualization**: Comprehensive evaluation plots and metrics
-- **GPU Accelerated**: Optimized for CUDA-enabled training and inference
+- **Dual Architecture Comparison**: Side-by-side evaluation of 2D vs 3D CNN approaches
+- **Adaptive Background Subtraction**: MOG2 with scene-adaptive parameter tuning
+- **Motion-Based Preprocessing**: Focus computational resources on motion regions
+- **Comprehensive Evaluation**: Frame-level metrics, qualitative analysis, and visualization
+- **Modular Design**: Clean separation of datasets, models, training, and evaluation
+- **Production-Ready**: Extensively tested pipeline with safety checks
+- **GPU Accelerated**: CUDA-optimized training and inference
 
 ## 📊 Results Summary
 
-### Model Performance on Test Set (14,946 samples)
+### Model Performance (Frame-Level Evaluation on Drone-vs-Bird Dataset)
 
-| Model | F1-Score | Accuracy | Precision | Recall | Training Time |
-|-------|----------|----------|-----------|--------|---------------|
-| **ResNet-18 (2D)** | **95.54%** | **95.38%** | **95.82%** | **95.38%** | 6 min/epoch |
-| R3D-18 (3D) | 86.54% | 84.30% | 91.15% | 84.30% | 12 min/epoch |
+| Model | F1-Score | Accuracy | Precision | Recall | Frame Coverage |
+|-------|----------|----------|-----------|--------|----------------|
+| **BGS + ResNet-18 (2D)** | **94.9%** | **94.7%** | **95.6%** | **94.7%** | 88.6% |
+| BGS + ResNet3D-18 (3D) | 83.8% | 73.0% | 96.1% | 74.4% | 88.6% |
 
 **Key Findings:**
-- 2D models achieve 9% higher F1-score than 3D models
-- 2D models are 2× faster to train
-- Spatial features alone are sufficient for static camera surveillance
-- Lower false negative rate with 2D approach (210 vs 306)
+- 2D achieves **11.1% higher F1-score** than 3D (94.9% vs 83.8%)
+- 3D has slightly higher precision (96.1% vs 95.6%) but much lower recall (74.4% vs 94.7%)
+- Background subtraction successfully captures **88.6% of drone frames**
+- Spatial features with single-frame analysis outperform temporal modeling for static cameras
+- T=3 temporal window insufficient for capturing meaningful drone motion patterns
+- 3D struggles with hovering drones that exhibit minimal inter-frame motion
 
 ## 🚀 Quick Start
 
@@ -52,7 +55,7 @@ CUDA 11.8+ (for GPU acceleration)
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/DroneDetection_2D_3D.git
+git clone https://github.com/ElifCntr/DroneDetection_2D_3D.git
 cd DroneDetection_2D_3D
 ```
 
@@ -77,50 +80,86 @@ python test_imports.py
 
 ```
 DroneDetection_2D_3D/
-├── src/                          # Source code
-│   ├── datasets/                 # Dataset loaders
-│   │   ├── frame_dataset.py     # Single frame dataset
-│   │   ├── region_dataset.py    # 2D region dataset
-│   │   └── tubelet_dataset.py   # 3D tubelet dataset
-│   ├── models/                   # Model architectures
-│   │   ├── resnet18.py          # 2D ResNet-18
-│   │   └── r3d18.py             # 3D R3D-18
-│   ├── training/                 # Training utilities
-│   │   └── trainer.py           # Training loop
-│   ├── evaluation/               # Evaluation tools
-│   ├── inference/                # Inference pipeline
-│   └── utils/                    # Utility functions
-│       ├── visualization/        # Plotting tools
-│       ├── checkpoint.py        # Model checkpointing
-│       ├── config.py            # Config loading
-│       ├── logging.py           # Logging utilities
-│       └── metrics.py           # Evaluation metrics
-├── scripts/                      # Executable scripts
-│   ├── train_2d.py              # Train 2D model
-│   ├── train_3d.py              # Train 3D model
-│   ├── evaluate_2d.py           # Evaluate 2D model
-│   └── evaluate_3d.py           # Evaluate 3D model
-├── configs/                      # Configuration files
-│   └── experiment.yaml          # Training configuration
-├── data/                         # Data directory
-│   ├── raw/                     # Raw video files
-│   ├── annotations/             # Ground truth annotations
-│   ├── 2d_regions/              # Extracted 2D regions
-│   └── tubelets/                # Generated 3D tubelets
-├── outputs/                      # Training outputs
-│   ├── checkpoints/             # Saved models
-│   ├── logs/                    # Training logs
-│   └── evaluation/              # Evaluation results
-├── test_imports.py              # Test installation
-├── visualize_test_results.py   # Visualization script
-└── README.md                    # This file
+├── src/                           # Source code
+│   ├── datasets/                  # Dataset loaders
+│   │   ├── frame_dataset.py      # Single frame dataset
+│   │   ├── region_dataset.py     # 2D region dataset
+│   │   └── tubelet_dataset.py    # 3D tubelet dataset
+│   ├── models/                    # Model architectures
+│   │   ├── resnet18.py           # 2D ResNet-18
+│   │   └── r3d18.py              # 3D R3D-18
+│   ├── training/                  # Training utilities
+│   │   └── trainer.py            # Unified trainer
+│   ├── evaluation/                # Evaluation system
+│   │   ├── evaluators/           # Model evaluators
+│   │   │   ├── evaluator_2d.py  # 2D evaluation
+│   │   │   └── evaluator_3d.py  # 3D evaluation
+│   │   └── analyzers/            # Analysis tools
+│   │       ├── qualitative_analyzer.py
+│   │       └── threshold_analyzer.py
+│   ├── inference/                 # Inference pipeline
+│   │   ├── video_processor.py    # Video processing
+│   │   ├── predictors/           # Model predictors
+│   │   │   ├── predictor_2d.py
+│   │   │   └── predictor_3d.py
+│   │   └── tubelets/             # Tubelet generation
+│   │       ├── generator.py
+│   │       └── generator_optimized.py
+│   └── utils/                     # Utility functions
+│       ├── visualization/         # Plotting tools
+│       │   ├── image_viewer.py
+│       │   ├── tubelet_viewer.py
+│       │   └── interactive_detect.py
+│       ├── checkpoint.py         # Model checkpointing
+│       ├── config.py             # Config loading
+│       ├── logging.py            # Logging utilities
+│       └── metrics.py            # Evaluation metrics
+├── scripts/                       # Executable scripts
+│   ├── train_2d.py               # Train 2D model
+│   ├── train_3d.py               # Train 3D model
+│   ├── evaluate_2d.py            # Evaluate 2D model
+│   ├── evaluate_3d.py            # Evaluate 3D model
+│   └── extract_2d_from_tubelets.py
+├── configs/                       # Configuration files
+│   └── test_experiment.yaml      # Experiment config
+├── data/                          # Data directory
+│   ├── raw/                      # Raw video files
+│   ├── annotations/              # Ground truth
+│   ├── splits/                   # Train/val/test splits
+│   ├── 2d_regions/               # Extracted 2D regions
+│   │   ├── train/
+│   │   ├── val/
+│   │   └── test/
+│   └── tubelets/                 # 3D tubelet sequences
+│       ├── train/
+│       ├── val/
+│       └── test/
+├── results/                       # Analysis results
+│   ├── 2d/                       # 2D model results
+│   │   └── resnet18/
+│   │       ├── TP_examples.csv
+│   │       ├── FP_examples.csv
+│   │       ├── FN_examples.csv
+│   │       ├── TN_examples.csv
+│   │       └── analysis_summary.json
+│   └── r3d18_qualitative_analysis/  # 3D analysis
+├── outputs/                       # Training outputs
+│   ├── checkpoints/              # Saved models
+│   ├── logs/                     # Training logs
+│   └── evaluation/               # Eval results
+├── test_imports.py               # Test installation
+├── test_all_components.py        # Component tests
+├── test_data_loading.py          # Data loading tests
+├── safety_checker.py             # Safety validation
+├── visualize_test_results.py    # Visualization script
+└── README.md                     # This file
 ```
 
 ## 🎓 Usage
 
 ### 1. Data Preparation
 
-Place your data in the following structure:
+Organize your data:
 ```bash
 data/
 ├── raw/                    # Raw video files (.mp4)
@@ -201,17 +240,22 @@ Edit `configs/experiment.yaml` to customize:
 
 ```yaml
 training:
-  batch_size: 32
+  batch_size: 32           # 32 for 2D, 16 for 3D
   epochs: 50
   learning_rate: 0.001
   weight_decay: 0.0001
 
 model:
-  name: resnet18  # or r3d18
+  name: resnet18           # or r3d18
   num_classes: 2
   pretrained: true
-  freeze_backbone: true
+  freeze_backbone: true    # Transfer learning
   dropout: 0.5
+
+background:
+  method: MOG2
+  var_threshold: 16        # Lower = more sensitive
+  detect_shadows: false
 
 evaluation:
   batch_size: 32
@@ -221,32 +265,50 @@ evaluation:
 
 ## 🔬 Research Context
 
-This work is part of a PhD research project at the **University of Sussex** investigating efficient drone detection methods for surveillance applications.
+This work is part of PhD research at the **University of Sussex** investigating efficient drone detection methods for surveillance applications.
 
-**Dataset**: 37 static surveillance videos from the Drone-vs-Bird Detection Challenge
-- **Training**: 30,967 samples
-- **Validation**: 10,756 samples  
-- **Test**: 14,946 samples
-- **Class distribution**: 10.5% positive (drone), 89.5% negative (background)
+**Dataset**: Drone-vs-Bird Detection Challenge
+- 37 static surveillance videos
+- Training: 30,967 samples (61.5% positive)
+- Validation: 10,756 samples (43.2% positive)  
+- Test: 14,946 samples (10.5% positive)
+- Challenging scenarios: water ripples, waving trees, birds, varying illumination
 
-## 📈 Detailed Results
+**Key Contributions**:
+- Adaptive background subtraction with scene-adaptive parameters
+- Comprehensive 2D vs 3D comparison for drone detection
+- Frame-level evaluation methodology
+- Modular, production-ready implementation
 
-### Confusion Matrix (2D Model)
+## 📈 Detailed Analysis
 
-```
-                 Predicted
-              Background  Drone
-Actual  
-Background     12,892      480
-Drone             210    1,364
-```
+### Why 2D Outperforms 3D
 
-### Per-Class Metrics
+1. **Static Camera Advantage**: Fixed surveillance cameras provide consistent viewpoints where spatial features are sufficient
+2. **Temporal Window Limitation**: T=3 frames insufficient for capturing meaningful drone motion patterns
+3. **Hovering Challenge**: 3D struggles with hovering drones exhibiting minimal inter-frame motion
+4. **Visual Ambiguity**: Many drone samples are blurry and blend with backgrounds, making temporal feature extraction difficult
+5. **BGS Warm-up Issue**: MOG2 requires warm-up period, but drones often appear in first frames of short sequences
 
-| Class | Precision | Recall | F1-Score |
-|-------|-----------|--------|----------|
-| Background | 98.40% | 96.41% | 97.39% |
-| Drone | 73.97% | 86.66% | 79.81% |
+### 3D Model Characteristics
+
+**Strengths:**
+- Highest precision (96.1%): When it predicts "drone," it's usually correct
+- Reduced false positives through temporal consistency
+
+**Weaknesses:**
+- Lower recall (74.4%): Misses many drone instances
+- Struggles with minimal motion scenarios
+- Higher computational cost
+
+### Performance Insights
+
+| Metric | 2D (BGS + ResNet-18) | 3D (BGS + ResNet3D-18) | Analysis |
+|--------|----------------------|------------------------|----------|
+| **Frame Coverage** | 88.6% | 88.6% | BGS performs equally for both |
+| **F1-Score** | 94.9% | 83.8% | 2D superior overall |
+| **Precision** | 95.6% | 96.1% | 3D slightly better |
+| **Recall** | 94.7% | 74.4% | 2D detects more drones |
 
 ## 🛠️ Development
 
@@ -261,6 +323,9 @@ python test_all_components.py
 
 # Test data loading
 python test_data_loading.py
+
+# Safety checks
+python safety_checker.py
 ```
 
 ### Code Organization
@@ -268,14 +333,14 @@ python test_data_loading.py
 - **Modular Design**: Clear separation of concerns
 - **Factory Pattern**: Easy model/dataset creation
 - **Configuration-Driven**: YAML-based configuration
-- **Type Hints**: Full type annotations throughout
-- **Documentation**: Comprehensive docstrings
+- **Type Hints**: Full type annotations
+- **Comprehensive Testing**: Unit and integration tests
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please:
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch (`git checkout -b feature/improvement`)
 3. Make your changes
 4. Submit a pull request
 
@@ -284,12 +349,12 @@ Contributions are welcome! Please:
 If you use this code in your research, please cite:
 
 ```bibtex
-@software{drone_detection_2d_3d,
-  author = {Elif Karaca},
-  title = {Drone Detection in Surveillance Videos: 2D vs 3D CNN Comparison},
+@software{drone_detection_2d_3d_2025,
+  author = {Elif Karaca and Phil Birch and Xudong Han and Yueying Tian},
+  title = {Drone Detection: 2D vs 3D CNN Comparison for Surveillance Videos},
   year = {2025},
-  institution = {University of Sussex},
-  url = {https://github.com/yourusername/DroneDetection_2D_3D}
+  publisher = {University of Sussex},
+  url = {https://github.com/ElifCntr/DroneDetection_2D_3D}
 }
 ```
 
@@ -297,8 +362,7 @@ If you use this code in your research, please cite:
 
 **Elif Karaca**  
 PhD Student, University of Sussex  
-Supervisor: Dr. Phil Birch
-
+Supervisor: Dr. Phil Birch  
 Co-authors: Xudong Han, Yueying Tian
 
 ## 📄 License
@@ -310,13 +374,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - University of Sussex for computational resources
 - YLSY scholarship funding
 - Drone-vs-Bird Detection Challenge for the dataset
-- PyTorch and torchvision teams for the frameworks
+- PyTorch and OpenCV teams
 
 ## 📧 Contact
 
 For questions or collaborations:
-- Email: [your.email@sussex.ac.uk]
-- GitHub Issues: [Project Issues](https://github.com/yourusername/DroneDetection_2D_3D/issues)
+- GitHub Issues: [Project Issues](https://github.com/ElifCntr/DroneDetection_2D_3D/issues)
+- Email: e.ucurum@sussex.ac.uk
 
 ---
 
