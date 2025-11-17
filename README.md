@@ -360,10 +360,9 @@ If you use this code in your research, please cite:
 
 ## 👥 Authors
 
-**Elif Karaca**  
+**Elif UCURUM**  
 PhD Student, University of Sussex  
-Supervisor: Dr. Phil Birch  
-Co-authors: Xudong Han, Yueying Tian
+Supervisor: Dr. Phil Birch
 
 ## 📄 License
 
@@ -372,7 +371,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - University of Sussex for computational resources
-- YLSY scholarship funding
 - Drone-vs-Bird Detection Challenge for the dataset
 - PyTorch and OpenCV teams
 
